@@ -26,6 +26,9 @@
     "ios": {
       "supportsTablet": true
     },
+    "android": {
+      "package": "com.yourcompany.yourappname"
+    },
     "description": "atualizações",
     "githubUrl": "https://github.com/AmaroPSJunior/ReactNative.git"
   }

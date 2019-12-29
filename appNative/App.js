@@ -1,15 +1,16 @@
 import styles from './styles.js'
 import React, { Component } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
-import { COLOR, ThemeContext, getTheme,Subheader,Toolbar } from 'react-native-material-ui'
+import { COLOR, ThemeContext, getTheme, Toolbar, Snackbar } from 'react-native-material-ui'
 import ButtonCustom from './src/components/buttonCustom'
-import RadioButtonCustom from './src/components/radioButtonCustom'
 import IconCustom from './src/components/iconCustom'
+import BottonNav from './src/components/bottonNav'
 
 
-export default class App2 extends Component {
+export default class App extends Component {
   state = {
     dialog: null,
+    item: null,
   }
 
   render() {
@@ -18,14 +19,14 @@ export default class App2 extends Component {
         primaryColor: COLOR.blue700,
       },
       toolbar: {
-        
         container: {
           height: 50,
-          top: 0,
+          top: 24,
+          paddingTop: 0,
         },
       },
       Toolbar: {
-        top: 110,
+        top: 100,
       },
       Subheader: {
         color: '#fff',
@@ -35,58 +36,41 @@ export default class App2 extends Component {
     return (
       <ThemeContext.Provider value={getTheme(uiTheme)}>
         <Toolbar
+          style={{ padding: 10 }}
           leftElement="menu"
           centerElement="Searchable"
-          searchable={{
-            autoFocus: true,
-            placeholder: 'Search',
+          searchable={{ autoFocus: true, placeholder: 'Search' }}
+          rightElement={{ menu: { icon: "more-vert", labels: ["item 1", "item 2", "item 3"] }}}
+          onRightElementPress={ (label) => { 
+            this.setState({ item: label.index + 1 })
+            console.log(label)
           }}
-          rightElement={{
-              menu: {
-                  icon: "more-vert",
-                  labels: ["item 1", "item 2"]
-              }
-          }}
-          onRightElementPress={ (label) => { console.log(label) }}
+          onLeftElementPress={ () => { alert('chama menu') }}
         />
+       
         
-        <View style={styles.container}>
+        <View style={ styles.container }>
           <IconCustom />
-          <Text style={styles.text}>app Expo</Text>
-          <Subheader text="Subheader text" />
+          <Text style={ styles.text }>app Expo</Text>
+        </View>
+
+        <View>
+          <Snackbar 
+            visible={ this.state.item > 0 } 
+            message={'Selecionado item ' + this.state.item} 
+            onRequestClose={() => {
+              setTimeout(() => {
+                this.setState({ item: 0 })
+              }, 500);
+            }}
+          />
         </View>
 
 
         <ButtonCustom />
 
-        <RadioButtonCustom />
-
+        <BottonNav />
       </ThemeContext.Provider>
     )
   }
 }
-
-
-// import stylesDefault from './styles.js'
-// import React, { Component } from 'react'
-// import { Text, View, StyleSheet } from 'react-native'
-// import ModalCustom from './src/components/modal'
-
-
-// export default class App extends Component {
-//   state = {
-
-//   }
-
-//   render() {
-    
-//     return (
-//       <View style={stylesDefault.container}> 
-//         <Text style={stylesDefault.text}>Expo</Text>
-//         <ModalCustom />
-//       </View>
-//     )
-//   }
-// }
-
-// AppRegistry.registerComponent('App', () => App);

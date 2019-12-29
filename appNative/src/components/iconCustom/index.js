@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { Icon } from 'react-native-material-ui'
+import { Icon, COLOR } from 'react-native-material-ui'
 import { StyleSheet } from 'react-native'
-import { COLOR } from 'react-native-material-ui'
 
 
 export default class IconCustom extends Component {

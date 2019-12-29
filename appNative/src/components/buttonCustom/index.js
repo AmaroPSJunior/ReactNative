@@ -12,8 +12,8 @@ export default class ButtonCustom extends Component {
         const styles = StyleSheet.create({
             snackbar: {
               position: 'absolute',
-              top: 200,
-              left: 20,
+              top: 50,
+              left: 50,
             },
         });
 
