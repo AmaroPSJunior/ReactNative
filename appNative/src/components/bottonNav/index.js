@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
 import { BottomNavigation } from 'react-native-material-ui';
+import { Actions } from 'react-native-router-flux';
 
 
 export default class bottomNav extends Component {
@@ -9,14 +10,23 @@ export default class bottomNav extends Component {
     };
     
     render() {
+        const goToAbout = () => {
+            Actions.about()
+            this.setState({ active: 'today' })
+        }
+
+        const goToHome = () => {
+            Actions.home()
+            this.setState({ active: 'settings' })
+        }
 
        return(
             <BottomNavigation active={this.state.active} hidden={false} >
                 <BottomNavigation.Action
-                    key="today"
-                    icon="today"
-                    label="Today"
-                    onPress={() => this.setState({ active: 'today' })}
+                    key="home"
+                    icon="home"
+                    label="home"
+                    onPress={() => goToHome()}
                 />
                 <BottomNavigation.Action
                     key="people"
@@ -36,7 +46,7 @@ export default class bottomNav extends Component {
                     key="settings"
                     icon="settings"
                     label="Settings"
-                    onPress={() => this.setState({ active: 'settings' })}
+                    onPress={() => goToAbout()}
                 />
             </BottomNavigation>
         )

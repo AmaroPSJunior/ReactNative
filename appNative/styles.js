@@ -1,13 +1,16 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import { COLOR } from 'react-native-material-ui'
+import { hide } from 'expo/build/launch/SplashScreen';
 
-
+const ScreenHeight = Dimensions.get("window").height;
 const styles = StyleSheet.create({
     container: {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: '#6e9cc1',
+      //height: ScreenHeight,
+      flex: 1, 
     },
     text: {
       backgroundColor: COLOR.blue700, 
@@ -18,7 +21,14 @@ const styles = StyleSheet.create({
       borderColor: '#fff',
       borderRadius: 10, 
       padding: 20,
-    }
+    },
+    bottom: { 
+      //height: ScreenHeight,
+      flex: 1, 
+    },
+    remove: {
+      display: "none",
+    },
 });
 
 export default styles

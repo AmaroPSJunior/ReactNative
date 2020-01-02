@@ -1,11 +1,11 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-native-vector-icons
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-native-material-ui
 
 PATH: 
-  C:\Python27\;C:\Python27\Scripts;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\ProgramData\chocolatey\bin;C:\Android\Sdk\platform-tools;C:\Android\Sdk\tools;C:\Program Files\Java\jdk1.8.0_231\bin;C:\Program Files\nodejs\;C:\Users\Amaro\AppData\Local\Microsoft\WindowsApps;C:\Users\Amaro\AppData\Local\Yarn\bin;C:\Users\Amaro\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\MongoDB\Server\4.2\bin;C:\Users\Amaro\AppData\Roaming\npm
+  C:\Python27\;C:\Python27\Scripts;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\Git\cmd;c:\php;C:\ProgramData\chocolatey\bin;C:\Program Files\Java\jdk1.8.0_231\bin;C:\Android\Sdk\platform-tools;C:\Android\Sdk\tools;C:\Program Files\nodejs\;C:\Users\Super E\AppData\Local\Microsoft\WindowsApps;C:\Users\Super E\AppData\Local\Yarn\bin;C:\Users\Super E\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Super E\AppData\Roaming\npm
 
 Yarn version: 
-  1.19.1
+  1.19.2
 
 Node version: 
   12.9.0
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'C:\Users\Amaro\Downloads\Github\ReactNative\appNative\node_modules\@babel\generator\node_modules\.bin'
+  Error: EPERM: operation not permitted, unlink 'C:\Users\Super E\Downloads\github\javaScript\ReactNative\appNative\node_modules\@babel\generator\node_modules\.bin'
 
 npm manifest: 
   {
@@ -32,6 +32,7 @@ npm manifest:
       "react-dom": "~16.9.0",
       "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
       "react-native-material-ui": "^1.30.1",
+      "react-native-router-flux": "^4.0.6",
       "react-native-vector-icons": "^6.6.0",
       "react-native-web": "~0.11.7"
     },
