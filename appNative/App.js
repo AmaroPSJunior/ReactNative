@@ -6,22 +6,17 @@ import Toolbar from './src/components/toolbar'
 import styles from './styles'
 
 import { AppLoading } from 'expo';
-import { Container, Text } from 'native-base';
+import { Container, Text, Button } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 
 
 export default class App extends Component {
-  state = {
-    dialog: null,
-    item: null,
-    page: '',
-  }
-
   constructor(props) {
     super(props);
     this.state = {
       isReady: false,
+      auth: true,
     };
   }
 
@@ -39,15 +34,30 @@ export default class App extends Component {
       return <AppLoading />;
     }
 
-    return (
-      <Container>
-        <ThemeContext.Provider value={getTheme(uiTheme)}>
-          <Toolbar style={styles.remove} />
-          <Routes />
-          <BottonNav />
-        </ThemeContext.Provider>
-      </Container>
-    )
+    if (this.state.auth) {
+      
+      return (
+        <Container>
+          <ThemeContext.Provider value={getTheme(uiTheme)}>
+            <Toolbar style={styles.remove} />
+              <Routes />
+            <BottonNav />
+          </ThemeContext.Provider>
+        </Container>
+      )
+
+    }else{
+
+      return (
+        <Container>
+          <ThemeContext.Provider value={getTheme(uiTheme)}>
+            <Routes/>
+          </ThemeContext.Provider>
+        </Container>
+      )
+
+    }
+
   }
 }
 
