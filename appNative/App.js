@@ -10,6 +10,9 @@ import { Container, Text, Button } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 
+const alerta = () => {
+  alert('teste alerta')
+}
 
 export default class App extends Component {
   constructor(props) {
@@ -17,9 +20,10 @@ export default class App extends Component {
     this.state = {
       isReady: false,
       auth: false,
+      teste: 'amaro',
     };
   }
-
+  
   async componentDidMount() {
     await Font.loadAsync({
       Roboto: require('native-base/Fonts/Roboto.ttf'),
@@ -27,9 +31,23 @@ export default class App extends Component {
       ...Ionicons.font,
     });
     this.setState({ isReady: true });
+
+  }
+
+
+
+  onChildChanged(bool) {
+    this.setState({auth: bool});
+    alert('App.js state auth:', this.state.auth)
   }
 
   render() {
+    const goBack = () => {
+      alert('teste alerta:', bool)
+    }
+
+    const { auth } = this.state
+    //console.log('app.js this', this)
     if (!this.state.isReady) {
       return <AppLoading/>;
     }
@@ -37,7 +55,8 @@ export default class App extends Component {
     return (
       <Container>
         <ThemeContext.Provider value={getTheme(uiTheme)}>
-          <Routes auth={false}/>
+          <Routes auth={auth} alerta={alert} callbackParent={(bool) => onChildChanged(bool)} isCentered={true}/>
+          {/* <Routes goBack={goBack}/> */}
         </ThemeContext.Provider>
       </Container>
     )

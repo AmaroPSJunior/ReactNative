@@ -6,10 +6,6 @@ import { COLOR } from 'react-native-material-ui';
 import img from '../../../assets/logo.png'
 
 
-const goToNewUser = () => {
-   Actions.newUser()
-}
-
 const goToForgotPassword = () => {
    Actions.forgotPassword()
 }
@@ -18,9 +14,15 @@ const goToTeste = () => {
    Actions.teste(true)
 }
 
+const goToApp = () => {
+   //alerta()
+}
 
-export default Index = () => {
+
+export default Index = (props) => {
    const [value, onChangeText] = React.useState('');
+   const { goBack } = props.navigation
+   console.log('props:', props)
 
    return (
       <View style={styles.Container}>
@@ -36,13 +38,15 @@ export default Index = () => {
                   <Text style={styles.LabelImput}>Senha</Text>
                   <TextInputCustom/>
                </View>
-               <TouchableOpacity style={styles.TouchableOpacity} onPress = {goToTeste}>
+               <TouchableOpacity 
+                  style={styles.TouchableOpacity} 
+                  onPress = {goToApp} 
+                  //onPress={props.callbackParent(true)}   
+                  onPress={goBack}   
+               >
                   <Text style={styles.TextButton}>Entrar</Text>
                </TouchableOpacity>
                <View style={styles.ContainerContentFooter}>
-                  <TouchableOpacity onPress = {goToNewUser}>
-                     <Text style={styles.TextFooter}>Cadastrarse</Text>
-                  </TouchableOpacity>
                   <TouchableOpacity onPress = {goToForgotPassword}>
                      <Text style={styles.TextFooter}>Esqueceu a Senha</Text>
                   </TouchableOpacity>
@@ -127,7 +131,7 @@ const styles = StyleSheet.create({
    },
    ContainerContentFooter:{
       flexDirection: "row",
-      justifyContent: "space-between",
+      justifyContent: "center",
    },
    TextFooter:{
       fontWeight: "bold",
@@ -135,3 +139,4 @@ const styles = StyleSheet.create({
       marginVertical: 10
    },
 })
+ 
