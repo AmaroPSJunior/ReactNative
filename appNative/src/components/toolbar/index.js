@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
 import { Toolbar } from 'react-native-material-ui';
+import { Actions } from 'react-native-router-flux'
+
+const goToTeste = () => {
+    Actions.teste(false)
+ }
 
 const listFunction = ( index ) => {
     
@@ -12,7 +17,7 @@ const listFunction = ( index ) => {
     } else if ( index == 1 ) {
         alert('selecionado item 2')    
     }else {
-        alert('selecionado ultimo item')    
+        goToTeste()   
     }
 }
 
@@ -44,7 +49,7 @@ export default class ToolbarCustom extends Component {
                         }, 300);
                     },
                 }}
-                rightElement={{ menu: { icon: "more-vert", labels: ["item 1", "item 2", "item 3"] }}}
+                rightElement={{ menu: { icon: "more-vert", labels: ["item 1", "item 2", "Sair"] }}}
                 onRightElementPress={ ( label ) => { 
                 //this.setState({ ListItem: label.index + 1 })
                 //console.log('item', this.state.ListItem)

@@ -16,7 +16,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       isReady: false,
-      auth: true,
+      auth: false,
     };
   }
 
@@ -31,33 +31,16 @@ export default class App extends Component {
 
   render() {
     if (!this.state.isReady) {
-      return <AppLoading />;
+      return <AppLoading/>;
     }
 
-    if (this.state.auth) {
-      
-      return (
-        <Container>
-          <ThemeContext.Provider value={getTheme(uiTheme)}>
-            <Toolbar style={styles.remove} />
-              <Routes />
-            <BottonNav />
-          </ThemeContext.Provider>
-        </Container>
-      )
-
-    }else{
-
-      return (
-        <Container>
-          <ThemeContext.Provider value={getTheme(uiTheme)}>
-            <Routes/>
-          </ThemeContext.Provider>
-        </Container>
-      )
-
-    }
-
+    return (
+      <Container>
+        <ThemeContext.Provider value={getTheme(uiTheme)}>
+          <Routes auth={false}/>
+        </ThemeContext.Provider>
+      </Container>
+    )
   }
 }
 
