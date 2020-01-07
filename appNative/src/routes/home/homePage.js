@@ -1,17 +1,23 @@
 import React, { Component } from 'react'
 import { TouchableOpacity, Text, View, Dimensions, StyleSheet, Image, ScrollView, SafeAreaView } from 'react-native'
 import IconCustom from '../../components/iconCustom'
-import { COLOR } from 'react-native-material-ui';
+import { COLOR } from 'react-native-material-ui'
 import api from '../../services'
 import axios from 'axios'
-import Constants from 'expo-constants';
+import Constants from 'expo-constants'
+//import Img from '../../../assets'
 
 
 export default class Home extends Component {
-    state = {
-        item: null,
-        error: null,
+    constructor(props) {
+        super(props);
+        this.state = {
+            item: null,
+            error: null,
+            data: [ 'pedro', 'amaro', 'junior' ],
+        };
     }
+    
     // componentDidMount(){
     //     const url = 'http://localhost:9090/'
     //     const url2 = 'http://www.mocky.io/v2/5e0e4ee0330000b580aa8add'
@@ -43,14 +49,20 @@ export default class Home extends Component {
                     </ScrollView>
                 </SafeAreaView>
                 <SafeAreaView style={styles.Content}>
-                    <ScrollView style={styles.scrollView} vertiical={true}>
-                        <View style={styles.item}>
-                            <Text style={styles.ImgItem}>item</Text>
-                            <View style={styles.DescriptionItem}>
-                                <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
-                                <Text style={styles.FooterItem}>01-01/2020</Text>
-                            </View>
-                        </View>
+                    <ScrollView style={styles.scrollView}>
+
+                        {
+                            this.state.data.map((item, i) => {
+                                <TouchableOpacity style={styles.item} key={i} onPress={() => alert('item:', i)}>
+                                    <Image  style={styles.ImgItem} />
+                                    <View style={styles.DescriptionItem}>
+                                        <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
+                                        <Text style={styles.FooterItem}>{i, item}  - 01-01/2020</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            })
+                        }
+
                     </ScrollView>
                 </SafeAreaView>
             </View>
@@ -94,10 +106,11 @@ const styles = StyleSheet.create({
         height: ScreenHeight,
     },
     item:{
+        //backgroundColor: "#bbb",
         flexDirection: 'row',
-        height: '100%',
-        backgroundColor: "#bbb",
-        width: 'auto'
+        height: 'auto',
+        width: 'auto',
+        marginVertical: 10,
     },
     ImgItem:{
         backgroundColor: COLOR.blue700, 
@@ -117,24 +130,25 @@ const styles = StyleSheet.create({
         
     },
     TextItem:{
+        //backgroundColor: "#ccc",
         fontWeight: 'bold',
         fontSize: 15,
         paddingHorizontal: 10,
         paddingRight: 10,
-        backgroundColor: "#ccc",
-        width: '42%',
-        height: '80%',
-        marginBottom: 5,
+        width: 240,
+        //height: 83,
+        textAlign: 'justify',
     },
     FooterItem:{
+        //backgroundColor: "#ddd",
         fontSize: 12,
         margin: 0,
-        paddingRight: 30,
-        width: '42%',
+        paddingRight: 10,
+        width: '100%',
         height: 'auto',
         textAlign: "right",
-        backgroundColor: "#ddd",
         bottom: 0,
+        textAlign: 'right',
     },
 })
 
