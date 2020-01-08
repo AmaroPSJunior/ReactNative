@@ -4,16 +4,11 @@ import { COLOR } from 'react-native-material-ui'
 import api from '../../services'
 import axios from 'axios'
 import Constants from 'expo-constants'
-<<<<<<< HEAD
 import ItemList from '../../components/ItemList';
-//import Img from '../../Img'
-//git
-=======
 import DataHora from '../../components/dataHora'
 import { Modal, Portal, Button, Provider, Drawer } from 'react-native-paper'
 import * as Paper from 'react-native-paper'
 const Text2 = Paper.Text
->>>>>>> f825b07f7af935a7bad20c68d9803a460afb961b
 
 export default class Home extends Component {
     constructor(props) {
@@ -21,13 +16,9 @@ export default class Home extends Component {
         this.state = {
             item: null,
             error: null,
-<<<<<<< HEAD
             data: [ 'pedro', 'amaro', 'junior' ], 
-=======
-            data: [ 'pedro', 'amaro', 'junior' ],
             visible: false,
             active: 'first',
->>>>>>> f825b07f7af935a7bad20c68d9803a460afb961b
         };
     }
     
@@ -52,27 +43,6 @@ export default class Home extends Component {
     _hideModal = () => this.setState({ visible: false });
 
     render() { 
-<<<<<<< HEAD
-
-        return (
-            <View style={styles.container}>     
-                <SafeAreaView style={styles.Header}>
-                    <ScrollView style={styles.scrollView} horizontal={true}>
-                        <Text style={styles.text}>item</Text>
-                        <Text style={styles.text}>item</Text>
-                        <Text style={styles.text}>item</Text>
-                        <Text style={styles.text}>item</Text>
-                        <Text style={styles.text}>item</Text>
-                        <Text style={styles.text}>item</Text>
-                    </ScrollView>
-                </SafeAreaView>
-                <SafeAreaView style={styles.Content}>
-                    <ScrollView style={styles.scrollView}>
-                        <ItemList />
-                    </ScrollView>
-                </SafeAreaView>
-            </View>
-=======
         const { active } = this.state;
         const { visible } = this.state;
         const Data = DataHora('data')
@@ -82,7 +52,7 @@ export default class Home extends Component {
 
             <Provider>
                 <Portal>
-                    <Drawer.Section title="Some title">
+                    {/* <Drawer.Section title="Some title">
                         <Drawer.Item
                             label="First Item"
                             active={active === 'first'}
@@ -93,7 +63,7 @@ export default class Home extends Component {
                             active={active === 'second'}
                             onPress={() => { this.setState({ active: 'second' }); }}
                         />
-                    </Drawer.Section>
+                    </Drawer.Section> */}
                     <Modal visible={visible} onDismiss={this._hideModal} style={styles.Modal}>
                         <Text2>Example Modal</Text2>
                     </Modal>
@@ -187,7 +157,6 @@ export default class Home extends Component {
                     </View>
                 </Portal>
             </Provider>
->>>>>>> f825b07f7af935a7bad20c68d9803a460afb961b
         )
     }
 }
@@ -230,9 +199,6 @@ const styles = StyleSheet.create({
     Content:{
         padding: 10,
         paddingTop: 30,
-<<<<<<< HEAD
-        height: '85%',
-=======
         height: '85.3%',
     },
     item:{
@@ -289,7 +255,6 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         flex: 1,
         lineHeight: 40,
->>>>>>> f825b07f7af935a7bad20c68d9803a460afb961b
     },
 })
 

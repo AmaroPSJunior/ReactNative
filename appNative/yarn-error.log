@@ -1,11 +1,11 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-native-paper
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-native-pape
 
 PATH: 
-  C:\Users\Amaro\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Amaro\bin;C:\Python27;C:\Python27\Scripts;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files (x86)\Yarn\bin;C:\Program Files\Git\cmd;C:\Program Files\dotnet;C:\Program Files\Microsoft SQL Server\130\Tools\Binn;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn;C:\ProgramData\chocolatey\bin;C:\Android\Sdk\platform-tools;C:\Android\Sdk\tools;C:\Program Files\Java\jdk1.8.0_231\bin;C:\Program Files\nodejs;C:\Users\Amaro\AppData\Local\Microsoft\WindowsApps;C:\Users\Amaro\AppData\Local\Yarn\bin;C:\Users\Amaro\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\MongoDB\Server\4.2\bin;C:\Users\Amaro\AppData\Roaming\npm;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+  C:\Users\Super E\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Super E\bin;C:\Python27;C:\Python27\Scripts;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files (x86)\Yarn\bin;C:\Program Files\Git\cmd;C:\php;C:\ProgramData\chocolatey\bin;C:\Program Files\Java\jdk1.8.0_231\bin;C:\Android\Sdk\platform-tools;C:\Android\Sdk\tools;C:\Program Files\nodejs;C:\ProgramData\ComposerSetup\bin;C:\Users\Super E\AppData\Local\Microsoft\WindowsApps;C:\Users\Super E\AppData\Local\Yarn\bin;C:\Users\Super E\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Super E\AppData\Roaming\npm;C:\Users\Super E\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
 
 Yarn version: 
-  1.19.1
+  1.19.2
 
 Node version: 
   12.9.0
@@ -14,7 +14,17 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'C:\Users\Amaro\Downloads\Github\ReactNative\appnative\node_modules\@babel\generator\node_modules\.bin'
+  Error: https://registry.yarnpkg.com/react-native-pape: Not found
+      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66036:18)
+      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140586:22)
+      at Request.emit (events.js:209:13)
+      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141558:10)
+      at Request.emit (events.js:209:13)
+      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141480:12)
+      at Object.onceWrapper (events.js:297:20)
+      at IncomingMessage.emit (events.js:214:15)
+      at endReadableNT (_stream_readable.js:1178:12)
+      at processTicksAndRejections (internal/process/task_queues.js:77:11)
 
 npm manifest: 
   {
