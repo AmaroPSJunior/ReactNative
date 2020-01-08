@@ -4,25 +4,24 @@ import { Actions } from 'react-native-router-flux'
 import TextInputCustom from '../../components/textInput';
 import { COLOR } from 'react-native-material-ui';
 import img from '../../../assets/logo.png'
+import { useSelector, useDispatch } from 'react-redux';
+//git
 
-
-const goToForgotPassword = () => {
-   Actions.forgotPassword()
-}
-
-const goToTeste = () => {
-   Actions.teste(true)
-}
-
-const goToApp = () => {
-   //alerta()
-}
-
-
-export default Index = (props) => {
+export default Index = () => {
    const [value, onChangeText] = React.useState('');
-   const { goBack } = props.navigation
-   console.log('props:', props)
+   const dispatch = useDispatch(); 
+
+   const goToForgotPassword = () => {
+      Actions.forgotPassword()
+   }
+   
+   function goToHome () {
+      dispatch(changeAuthAction(true))
+   }
+   
+   function changeAuthAction (bool) {
+      return { type: 'CHANGE_AUTH', bool }
+   } 
 
    return (
       <View style={styles.Container}>
@@ -38,12 +37,7 @@ export default Index = (props) => {
                   <Text style={styles.LabelImput}>Senha</Text>
                   <TextInputCustom/>
                </View>
-               <TouchableOpacity 
-                  style={styles.TouchableOpacity} 
-                  onPress = {goToApp} 
-                  //onPress={props.callbackParent(true)}   
-                  onPress={goBack}   
-               >
+               <TouchableOpacity style={styles.TouchableOpacity} onPress = {goToHome} >
                   <Text style={styles.TextButton}>Entrar</Text>
                </TouchableOpacity>
                <View style={styles.ContainerContentFooter}>

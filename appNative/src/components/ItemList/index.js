@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { TouchableOpacity, Text, Button, View, Dimensions, StyleSheet, Image, ScrollView, SafeAreaView } from 'react-native'
 import { COLOR } from 'react-native-material-ui'
 import Constants from 'expo-constants'
+//git
 
 function addItemAction(title) {
   return { type: 'ADD_ITEM', title }
@@ -20,7 +21,7 @@ export default function ItensList() {
 
   return ( 
     <>
-      <View>
+      <View> 
         { itens.map((item, i) => 
           <TouchableOpacity key={i} style={styles.item} onPress={() => alert('item:')}>
             <Text style={styles.ImgItem}>{item + '-' + i}</Text>

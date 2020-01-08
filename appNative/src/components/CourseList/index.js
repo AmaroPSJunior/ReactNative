@@ -6,8 +6,8 @@ function addCourseAction(title) {
   return { type: 'ADD_COURSE', title }
 }
 
-export default function CourseList() {
-  const qty = 2;
+export default function ItemList() {
+  const qty = 10;
 
   const courses = useSelector(state => state.data.slice(0, qty));
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ export default function CourseList() {
     console.log(courses)
   }
 
-  return (
+  return ( 
     <>
       <View>
         { courses.map(course => <Text key={course}>{course}</Text>) }

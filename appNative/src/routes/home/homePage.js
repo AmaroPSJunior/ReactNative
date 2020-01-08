@@ -5,8 +5,9 @@ import { COLOR } from 'react-native-material-ui'
 import api from '../../services'
 import axios from 'axios'
 import Constants from 'expo-constants'
-//import Img from '../../../assets'
-
+import ItemList from '../../components/ItemList';
+//import Img from '../../Img'
+//git
 
 export default class Home extends Component {
     constructor(props) {
@@ -14,7 +15,7 @@ export default class Home extends Component {
         this.state = {
             item: null,
             error: null,
-            data: [ 'pedro', 'amaro', 'junior' ],
+            data: [ 'pedro', 'amaro', 'junior' ], 
         };
     }
     
@@ -36,6 +37,7 @@ export default class Home extends Component {
     // }
 
     render() { 
+
         return (
             <View style={styles.container}>     
                 <SafeAreaView style={styles.Header}>
@@ -50,19 +52,7 @@ export default class Home extends Component {
                 </SafeAreaView>
                 <SafeAreaView style={styles.Content}>
                     <ScrollView style={styles.scrollView}>
-
-                        {
-                            this.state.data.map((item, i) => {
-                                <TouchableOpacity style={styles.item} key={i} onPress={() => alert('item:', i)}>
-                                    <Image  style={styles.ImgItem} />
-                                    <View style={styles.DescriptionItem}>
-                                        <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
-                                        <Text style={styles.FooterItem}>{i, item}  - 01-01/2020</Text>
-                                    </View>
-                                </TouchableOpacity>
-                            })
-                        }
-
+                        <ItemList />
                     </ScrollView>
                 </SafeAreaView>
             </View>
@@ -103,52 +93,7 @@ const styles = StyleSheet.create({
     Content:{
         padding: 10,
         paddingTop: 30,
-        height: ScreenHeight,
-    },
-    item:{
-        //backgroundColor: "#bbb",
-        flexDirection: 'row',
-        height: 'auto',
-        width: 'auto',
-        marginVertical: 10,
-    },
-    ImgItem:{
-        backgroundColor: COLOR.blue700, 
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: 20,
-        borderWidth: 1,
-        borderColor: '#fff',
-        borderRadius: 10, 
-        textAlign: "center",
-        lineHeight: 100,
-        margin: 0,
-        height: 100,
-        width: 100,
-    },
-    DescriptionItem:{
-        
-    },
-    TextItem:{
-        //backgroundColor: "#ccc",
-        fontWeight: 'bold',
-        fontSize: 15,
-        paddingHorizontal: 10,
-        paddingRight: 10,
-        width: 240,
-        //height: 83,
-        textAlign: 'justify',
-    },
-    FooterItem:{
-        //backgroundColor: "#ddd",
-        fontSize: 12,
-        margin: 0,
-        paddingRight: 10,
-        width: '100%',
-        height: 'auto',
-        textAlign: "right",
-        bottom: 0,
-        textAlign: 'right',
+        height: '85%',
     },
 })
 
