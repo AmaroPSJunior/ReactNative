@@ -7,79 +7,52 @@ import ForgotPassword from './auth/forgotPassword'
 import NewUser from './auth/newUser'
 import Index from './auth/index'
 import ErrorPage from './error'
-import Teste from './auth/teste'
+import Toolbar from '../components/toolbar'
+import BottonNav from '../components/bottonNav'
 
 
 export default class Routes extends Component {
    constructor(props) {
       super(props);
       this.state = {
-        auth: false,
+        auth: true,
       };
-   }
-   
-   componentDidMount(){
-      const { auth } = this.props
-      if (auth) {
-         this.setState({auth})
-      } 
    }
 
    render(){
-      const { auth } = this.state
-      const { alerta } = this.props
-
-     
-      if (auth) {
-
+      if (this.state.auth) {
          return(
-            <Router>
-               <Scene key = "root" >
-                  <Scene key = "index" component = {Index} hideNavBar = {true} alerta={alerta} />
-                  <Scene key = "authPage" component = {AuthPage} hideNavBar = {true} />
-                  <Scene key = "forgotPassword" component = {ForgotPassword} hideNavBar = {true} />
-                  <Scene key = "home" component = {Home} hideNavBar = {true} />
-                  <Scene key = "newUser" component = {NewUser} hideNavBar = {true} />
-                  <Scene key = "about" component = {About} hideNavBar = {true} />
-                  <Scene key = "error" component = {ErrorPage} hideNavBar = {true} />
-                  <Scene key = "teste" component = {Teste} hideNavBar = {true} initial = {true} />
-               </Scene>
-            </Router>
+            <>
+               <Toolbar/>
+               <Router>
+                  <Scene key = "root" >
+                     <Scene key = "index" component = {Index} hideNavBar = {true} />
+                     <Scene key = "authPage" component = {AuthPage} hideNavBar = {true} />
+                     <Scene key = "forgotPassword" component = {ForgotPassword} hideNavBar = {true} />
+                     <Scene key = "home" component = {Home} hideNavBar = {true} initial = {true} />
+                     <Scene key = "newUser" component = {NewUser} hideNavBar = {true} />
+                     <Scene key = "about" component = {About} hideNavBar = {true} />
+                     <Scene key = "error" component = {ErrorPage} hideNavBar = {true} />
+                  </Scene>
+               </Router>
+               <BottonNav/>
+            </>
          )
       } else {
        
          return(
             <Router>
                <Scene key = "root" >
-                  <Scene key = "index" component = {Index} hideNavBar = {true} />
+                  <Scene key = "index" component = {Index} hideNavBar = {true} initial = {true} />
                   <Scene key = "authPage" component = {AuthPage} hideNavBar = {true} />
                   <Scene key = "forgotPassword" component = {ForgotPassword} hideNavBar = {true} />
-                  <Scene key = "home" component = {Home} hideNavBar = {true} initial = {true} />
+                  <Scene key = "home" component = {Home} hideNavBar = {true} />
                   <Scene key = "newUser" component = {NewUser} hideNavBar = {true} />
                   <Scene key = "about" component = {About} hideNavBar = {true} />
                   <Scene key = "error" component = {ErrorPage} hideNavBar = {true} />
-                  <Scene key = "teste" component = {Teste} hideNavBar = {true} />
                </Scene>
             </Router>
          )
       } 
-
-      // <Router>
-      //    <Scene key = "root" >
-      //       <Scene key = "index" component = {Index} hideNavBar = {true} initial = {!auth} />
-      //       <Scene key = "authPage" component = {AuthPage} hideNavBar = {true} />
-      //       <Scene key = "forgotPassword" component = {ForgotPassword} hideNavBar = {true} />
-      //       <Scene key = "home" component = {Home} hideNavBar = {true} />
-      //       <Scene key = "newUser" component = {NewUser} hideNavBar = {true} />
-      //       <Scene key = "about" component = {About} hideNavBar = {true} />
-      //       <Scene key = "error" component = {ErrorPage} hideNavBar = {true} />
-      //       <Scene key = "teste" component = {Teste} hideNavBar = {true} initial = {auth} />
-      //    </Scene>
-      // </Router>
-
-      // //tentativa !!!
-      // <Toolbar />
-      //       <Routes auth={obj.data}/>
-      // <BottonNav />
    }
 }

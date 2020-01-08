@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { TouchableOpacity, Text, View, Dimensions, StyleSheet, Image, ScrollView, SafeAreaView } from 'react-native'
-import IconCustom from '../../components/iconCustom'
 import { COLOR } from 'react-native-material-ui'
 import api from '../../services'
 import axios from 'axios'
 import Constants from 'expo-constants'
-//import Img from '../../../assets'
-
+import DataHora from '../../components/dataHora'
+import { Modal, Portal, Button, Provider, Drawer } from 'react-native-paper'
+import * as Paper from 'react-native-paper'
+const Text2 = Paper.Text
 
 export default class Home extends Component {
     constructor(props) {
@@ -15,6 +16,8 @@ export default class Home extends Component {
             item: null,
             error: null,
             data: [ 'pedro', 'amaro', 'junior' ],
+            visible: false,
+            active: 'first',
         };
     }
     
@@ -35,37 +38,124 @@ export default class Home extends Component {
     //     handleTeste()
     // }
 
-    render() { 
-        return (
-            <View style={styles.container}>     
-                <SafeAreaView style={styles.Header}>
-                    <ScrollView style={styles.scrollView} horizontal={true}>
-                        <Text style={styles.text}>item</Text>
-                        <Text style={styles.text}>item</Text>
-                        <Text style={styles.text}>item</Text>
-                        <Text style={styles.text}>item</Text>
-                        <Text style={styles.text}>item</Text>
-                        <Text style={styles.text}>item</Text>
-                    </ScrollView>
-                </SafeAreaView>
-                <SafeAreaView style={styles.Content}>
-                    <ScrollView style={styles.scrollView}>
+    _showModal = () => this.setState({ visible: true });
+    _hideModal = () => this.setState({ visible: false });
 
-                        {
-                            this.state.data.map((item, i) => {
-                                <TouchableOpacity style={styles.item} key={i} onPress={() => alert('item:', i)}>
-                                    <Image  style={styles.ImgItem} />
+    render() { 
+        const { active } = this.state;
+        const { visible } = this.state;
+        const Data = DataHora('data')
+        console.log('home.js', DataHora('hours'))
+
+        return (
+
+            <Provider>
+                <Portal>
+                    <Drawer.Section title="Some title">
+                        <Drawer.Item
+                            label="First Item"
+                            active={active === 'first'}
+                            onPress={() => { this.setState({ active: 'first' }); }}
+                        />
+                        <Drawer.Item
+                            label="Second Item"
+                            active={active === 'second'}
+                            onPress={() => { this.setState({ active: 'second' }); }}
+                        />
+                    </Drawer.Section>
+                    <Modal visible={visible} onDismiss={this._hideModal} style={styles.Modal}>
+                        <Text2>Example Modal</Text2>
+                    </Modal>
+
+                    <View style={styles.container}>
+                        <SafeAreaView style={styles.Header}>
+                            <ScrollView style={styles.scrollView} horizontal={true}>
+                                <Text style={styles.text}>item</Text>
+                                <Text style={styles.text}>item</Text>
+                                <Text style={styles.text}>item</Text>
+                                <Text style={styles.text}>item</Text>
+                                <Text style={styles.text}>item</Text>
+                                <Text style={styles.text}>item</Text>
+                            </ScrollView>
+                        </SafeAreaView>
+                        <SafeAreaView style={styles.Content}>
+                            <ScrollView style={styles.scrollView}>
+
+                                <TouchableOpacity style={styles.item} onPress={this._showModal}>
+                                    <Image source={require(`../../../assets/${1}.jpg`)} style={styles.ImgItem} />
                                     <View style={styles.DescriptionItem}>
                                         <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
-                                        <Text style={styles.FooterItem}>{i, item}  - 01-01/2020</Text>
+                                        <View style={styles.FooterItem}>
+                                            <Text style={styles.TitleFooterItem}>Title</Text>
+                                            <Text style={styles.DataFooterItem}>{Data}</Text>
+                                        </View>
                                     </View>
                                 </TouchableOpacity>
-                            })
-                        }
-
-                    </ScrollView>
-                </SafeAreaView>
-            </View>
+                                <TouchableOpacity style={styles.item} onPress={() => alert('item:')}>
+                                    <Image source={require(`../../../assets/${2}.jpg`)} style={styles.ImgItem} />
+                                    <View style={styles.DescriptionItem}>
+                                        <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
+                                        <View style={styles.FooterItem}>
+                                            <Text style={styles.TitleFooterItem}>Title</Text>
+                                            <Text style={styles.DataFooterItem}>{Data}</Text>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.item} onPress={() => alert('item:')}>
+                                    <Image source={require(`../../../assets/${3}.jpg`)} style={styles.ImgItem} />
+                                    <View style={styles.DescriptionItem}>
+                                        <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
+                                        <View style={styles.FooterItem}>
+                                            <Text style={styles.TitleFooterItem}>Title</Text>
+                                            <Text style={styles.DataFooterItem}>{Data}</Text>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.item} onPress={() => alert('item:')}>
+                                    <Image source={require(`../../../assets/${4}.jpg`)} style={styles.ImgItem} />
+                                    <View style={styles.DescriptionItem}>
+                                        <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
+                                        <View style={styles.FooterItem}>
+                                            <Text style={styles.TitleFooterItem}>Title</Text>
+                                            <Text style={styles.DataFooterItem}>{Data}</Text>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.item} onPress={() => alert('item:')}>
+                                    <Image source={require(`../../../assets/${5}.jpg`)} style={styles.ImgItem} />
+                                    <View style={styles.DescriptionItem}>
+                                        <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
+                                        <View style={styles.FooterItem}>
+                                            <Text style={styles.TitleFooterItem}>Title</Text>
+                                            <Text style={styles.DataFooterItem}>{Data}</Text>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.item} onPress={() => alert('item:')}>
+                                    <Image source={require(`../../../assets/${6}.jpg`)} style={styles.ImgItem} />
+                                    <View style={styles.DescriptionItem}>
+                                        <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
+                                        <View style={styles.FooterItem}>
+                                            <Text style={styles.TitleFooterItem}>Title</Text>
+                                            <Text style={styles.DataFooterItem}>{Data}</Text>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.item} onPress={() => alert('item:')}>
+                                    <Image source={require(`../../../assets/${7}.png`)} style={styles.ImgItem} />
+                                    <View style={styles.DescriptionItem}>
+                                        <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
+                                        <View style={styles.FooterItem}>
+                                            <Text style={styles.TitleFooterItem}>Title</Text>
+                                            <Text style={styles.DataFooterItem}>{Data}</Text>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+                            </ScrollView>
+                        </SafeAreaView>
+                    </View>
+                </Portal>
+            </Provider>
         )
     }
 }
@@ -73,11 +163,17 @@ export default class Home extends Component {
 const ScreenHeight = Dimensions.get("window").height
 const ScreenWidth = Dimensions.get("window").width
 const styles = StyleSheet.create({
+    Modal:{
+        height: 100, 
+        width: 100, 
+        backgroundColor: 'red',
+        zIndex: 50, 
+        left: '50%',
+        top: '50%',
+
+    },
     Container: {
         backgroundColor: '#6e9cc1',
-        //alignItems: 'center',
-        //justifyContent: 'center',
-        //height: ScreenHeight,
         height: 100,
         flex: 1,
         marginTop: Constants.statusBarHeight,
@@ -87,7 +183,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
     },
     scrollView: {
-        //backgroundColor: '#ccc',
     },
     text: {
         backgroundColor: COLOR.blue700, 
@@ -103,10 +198,9 @@ const styles = StyleSheet.create({
     Content:{
         padding: 10,
         paddingTop: 30,
-        height: ScreenHeight,
+        height: '85.3%',
     },
     item:{
-        //backgroundColor: "#bbb",
         flexDirection: 'row',
         height: 'auto',
         width: 'auto',
@@ -127,28 +221,39 @@ const styles = StyleSheet.create({
         width: 100,
     },
     DescriptionItem:{
-        
+        height: 100,
     },
     TextItem:{
-        //backgroundColor: "#ccc",
-        fontWeight: 'bold',
         fontSize: 15,
         paddingHorizontal: 10,
         paddingRight: 10,
         width: 240,
-        //height: 83,
-        textAlign: 'justify',
     },
     FooterItem:{
-        //backgroundColor: "#ddd",
+        flexDirection: "row",
+    },
+    TitleFooterItem:{
+        color: '#aaa',
+        fontSize: 12,
+        margin: 0,
+        paddingLeft: 10,
+        width: 100,
+        height: 'auto',
+        bottom: 0,
+        flex: 1,
+        lineHeight: 40,
+    },
+    DataFooterItem:{
+        color: '#aaa',
         fontSize: 12,
         margin: 0,
         paddingRight: 10,
-        width: '100%',
+        width: 100,
         height: 'auto',
-        textAlign: "right",
         bottom: 0,
         textAlign: 'right',
+        flex: 1,
+        lineHeight: 40,
     },
 })
 
