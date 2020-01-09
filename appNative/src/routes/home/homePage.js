@@ -21,32 +21,58 @@ export default class Home extends Component {
             active: 'first',
         };
     }
-    
-    // componentDidMount(){
-    //     const url = 'http://localhost:9090/'
-    //     const url2 = 'http://www.mocky.io/v2/5e0e4ee0330000b580aa8add'
-
-    //     const handleTeste = async () => {
-
-    //         axios.get(url)
-    //         .then((response) => {
-    //             console.log('res:', response.status )
-    //         })
-    //         .catch(function (error) {
-    //             console.log('error:', error) 
-    //         })
-    //     }
-    //     handleTeste()
-    // }
 
     _showModal = () => this.setState({ visible: true });
     _hideModal = () => this.setState({ visible: false });
 
     render() { 
+
+        // const api = {
+        //     process_name: "ola",
+        //     description: "aposdpaosd",
+        //     status: 1,
+        //     data_begin: {
+        //         date: "2019-12-19 15:55:01.000000",
+        //         timezone_type: 3,
+        //         timezone: "America/Sao_Paulo"
+        //     },
+        //     data_end: {
+        //         date: "2019-12-19 15:55:01.000000",
+        //         timezone_type: 3,
+        //         timezone: "America/Sao_Paulo"
+        //     },
+        //     value: 1,
+        //     error: false
+        // }
+
         const { active } = this.state;
         const { visible } = this.state;
         const Data = DataHora('data')
         console.log('home.js', DataHora('hours'))
+
+        const url1 = 'http://localhost:3003/'
+        const url2 = 'http://localhost:9090/v1/user/'
+        const url3 = 'http://www.mocky.io/v2/5e0e4ee0330000b580aa8add'
+        const handleTeste = async () => {
+
+            // axios.get(url2)
+            // .then((response) => {
+            //     console.log('res: ' + response)
+            //     alert('res: ' + response)
+            // })
+            // .catch(function (error) {
+            //     console.log('erro: ' + error) 
+            //     alert('erro: ' + error) 
+            // })
+
+            fetch(url1)
+            .then((res)=> res.json())
+            .then((json) => console.log(json))
+
+
+        }
+        handleTeste()
+        
 
         return (
 
@@ -92,7 +118,7 @@ export default class Home extends Component {
                                         </View>
                                     </View>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.item} onPress={() => alert('item:')}>
+                                <TouchableOpacity style={styles.item} onPress={handleTeste}>
                                     <Image source={require(`../../../assets/${2}.jpg`)} style={styles.ImgItem} />
                                     <View style={styles.DescriptionItem}>
                                         <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>

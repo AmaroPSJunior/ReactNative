@@ -28,7 +28,7 @@ export default ToolbarCustom = () => {
             alert('selecionado item 1')    
         } else if ( index == 1 ) {
             alert('selecionado item 2')    
-        }else {
+        }else if ( index == 2 ) {
             goToIndex()   
         }
     }
@@ -57,7 +57,7 @@ export default ToolbarCustom = () => {
             onRightElementPress={ ( label ) => { 
             //this.setState({ ListItem: label.index + 1 })
             //console.log('item', this.state.ListItem)
-            console.log('label', label )
+            console.log('../toolbar label: ', label )
             listFunction( label.index )
                 
             }}
