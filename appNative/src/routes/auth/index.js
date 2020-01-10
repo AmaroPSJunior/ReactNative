@@ -6,6 +6,7 @@ import { COLOR } from 'react-native-material-ui';
 import img from '../../../assets/logo.png'
 import { useSelector, useDispatch } from 'react-redux';
 import api from '../../services'
+import Axios from 'axios';
 
 
 export default Index = () => {
@@ -42,23 +43,25 @@ export default Index = () => {
 
    const reqAuthUser = async (user, password) => {
    
-      api.post('login', {
-         client_id: "houseflix_client",
-         client_secret: "92427ae41e4649b934e3b0c44298fc1c149afbf4c8996fbca495991b7852b855",
-         grant_type: "xpassword",
-         username: user,
-         password: password
-      })
+      Axios.get('http://localhost:3003/')
+      //api.post('login', {
+      //    client_id: "houseflix_client",
+      //    client_secret: "92427ae41e4649b934e3b0c44298fc1c149afbf4c8996fbca495991b7852b855",
+      //    grant_type: "xpassword",
+      //    username: user,
+      //    password: password
+      // })
       .then((response) => {
          const { access_token } = response.data
    
          if (response.data.error) {
-            alert(response.data.error_description)
+            alert('teste' + response.data.error_description)
          } 
          alert('access_token: ' + access_token)
       })
       .catch(function (error) {
         console.log('ER' + error) 
+        alert('ER' + error) 
       })
    }
 
