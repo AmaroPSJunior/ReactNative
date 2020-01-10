@@ -5,23 +5,62 @@ import TextInputCustom from '../../components/textInput';
 import { COLOR } from 'react-native-material-ui';
 import img from '../../../assets/logo.png'
 import { useSelector, useDispatch } from 'react-redux';
-//git
+import api from '../../services'
+
 
 export default Index = () => {
-   const [value, onChangeText] = React.useState('');
    const dispatch = useDispatch(); 
-
+   const state = useSelector(state => state)
+   const [user, setUser] = React.useState('am');
+   const [password, setPassword] = React.useState('1234');
+   const { token } = state
+   alert('token: ' + token)
+   
    const goToForgotPassword = () => {
       Actions.forgotPassword()
    }
    
-   function goToHome () {
+   function authenticated () {
+      dispatch(User(user))
+      dispatch(Password(password))
+      reqAuthUser(user, password)
       dispatch(changeAuthAction(true))
+      dispatch(changeTockenAction(token))
    }
-   
-   function changeAuthAction (bool) {
-      return { type: 'CHANGE_AUTH', bool }
+   function User(text) {
+      return { type: 'CHANGE_USER', text } 
    } 
+   function Password(text) {
+      return { type: 'CHANGE_PASSWORD', text } 
+   } 
+   function changeAuthAction (bool) {
+      return { type: 'CHANGE_AUTH', bool } 
+   }
+   function changeTockenAction (text) {
+      return { type: 'CHANGE_TOKEN', text } 
+   }
+
+   const reqAuthUser = async (user, password) => {
+   
+      api.post('login', {
+         client_id: "houseflix_client",
+         client_secret: "92427ae41e4649b934e3b0c44298fc1c149afbf4c8996fbca495991b7852b855",
+         grant_type: "xpassword",
+         username: user,
+         password: password
+      })
+      .then((response) => {
+         const { access_token } = response.data
+   
+         if (response.data.error) {
+            alert(response.data.error_description)
+         } 
+         alert('access_token: ' + access_token)
+      })
+      .catch(function (error) {
+        console.log('ER' + error) 
+      })
+   }
 
    return (
       <View style={styles.Container}>
@@ -33,11 +72,11 @@ export default Index = () => {
                <Text style={styles.Title}>Login</Text>
                <View>
                   <Text style={styles.LabelImput}>Nome</Text>
-                  <TextInputCustom onChangeText={text => onChangeText(text)} value={value} />
+                  <TextInputCustom onChangeText={text => setUser(text)} value={user} secureTextEntry={false}/>
                   <Text style={styles.LabelImput}>Senha</Text>
-                  <TextInputCustom/>
+                  <TextInputCustom onChangeText={text => setPassword(text)} value={password} secureTextEntry={true}/>
                </View>
-               <TouchableOpacity style={styles.TouchableOpacity} onPress = {goToHome} >
+               <TouchableOpacity style={styles.TouchableOpacity} onPress = {authenticated} >
                   <Text style={styles.TextButton}>Entrar</Text>
                </TouchableOpacity>
                <View style={styles.ContainerContentFooter}>

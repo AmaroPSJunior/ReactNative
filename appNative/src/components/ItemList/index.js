@@ -3,11 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { TouchableOpacity, Text, Button, View, Dimensions, StyleSheet, Image, ScrollView, SafeAreaView } from 'react-native'
 import { COLOR } from 'react-native-material-ui'
 import Constants from 'expo-constants'
-//git
 
-function addItemAction(title) {
-  return { type: 'ADD_ITEM', title }
-}
 
 export default function ItensList() {
   const qty = 100;
@@ -17,6 +13,10 @@ export default function ItensList() {
   function addItem() {
     dispatch(addItemAction('amaro'))
     console.log(itens)
+  }
+
+  function addItemAction(title) {
+    return { type: 'ADD_ITEM', title }
   }
 
   return ( 

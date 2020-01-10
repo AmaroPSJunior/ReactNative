@@ -14,10 +14,10 @@ import BottonNav from '../components/bottonNav'
 
 
 export default Routes = () => {
-   const data = useSelector(state => state.authenticated);
+   const authenticated = useSelector(state => state.authenticated);
 
-   if (data) {
-      return(
+   if (authenticated) {
+      return( 
          <>
             <Toolbar/>
             <Router>

@@ -3,7 +3,34 @@ import { StyleSheet } from 'react-native'
 import { Toolbar } from 'react-native-material-ui';
 import { Actions } from 'react-native-router-flux'
 import { useSelector, useDispatch } from 'react-redux';
+import api from '../../services'
 
+const reqLogoutUser = async () => {
+    const state = useSelector(state => state)
+    const { token } = state
+    console.log('token', token)
+  
+    alert('teste')
+
+    api.post('logout/' + access_token)
+    .then((response) => {
+ 
+       alert(response.data)
+    })
+    .then((response) => {
+       const { access_token } = response.data
+ 
+       if (response.data.error) {
+          alert(response.data.error_description)
+       } 
+       
+       alert('access_token: ' + access_token)
+ 
+    })
+    .catch(function (error) {
+      console.log('ER' + error) 
+    })
+ }
 
 export default ToolbarCustom = () => {
     state = {
@@ -29,7 +56,8 @@ export default ToolbarCustom = () => {
         } else if ( index == 1 ) {
             alert('selecionado item 2')    
         }else if ( index == 2 ) {
-            goToIndex()   
+            reqLogoutUser()
+            goToIndex() 
         }
     }
 
@@ -57,7 +85,7 @@ export default ToolbarCustom = () => {
             onRightElementPress={ ( label ) => { 
             //this.setState({ ListItem: label.index + 1 })
             //console.log('item', this.state.ListItem)
-            console.log('../toolbar label: ', label )
+            //console.log('../toolbar label: ', label )
             listFunction( label.index )
                 
             }}

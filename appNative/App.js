@@ -15,8 +15,6 @@ export default class App extends Component {
     super(props);
     this.state = {
       isReady: false,
-      auth: false,
-      teste: 'amaro',
     };
   }
   
@@ -30,12 +28,10 @@ export default class App extends Component {
   }
 
   render() {
-    console.log('app.js', DataHora('hours'))
-
     if (!this.state.isReady) {
       return <AppLoading/>;
     }
-
+ 
     return (
       <Provider store={store}>
         <Container>
