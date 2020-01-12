@@ -1,13 +1,16 @@
-import React, { Component } from 'react'
 import { TouchableOpacity, Text, View, Dimensions, StyleSheet, Image, ScrollView, SafeAreaView } from 'react-native'
+import { Modal, Portal, Provider } from 'react-native-paper'
 import { COLOR } from 'react-native-material-ui'
-import api from '../../services'
-import axios from 'axios'
-import Constants from 'expo-constants'
-import ItemList from '../../components/ItemList';
-import DataHora from '../../components/dataHora'
-import { Modal, Portal, Button, Provider, Drawer } from 'react-native-paper'
 import * as Paper from 'react-native-paper'
+import React, { Component } from 'react'
+import Constants from 'expo-constants'
+
+import getUser from '../../services/getUser'
+import reqTesteApi from '../../services/reqTesteApi'
+import Login from '../../services/login'
+import Data from '../../components/dataHora'
+
+
 const Text2 = Paper.Text
 
 export default class Home extends Component {
@@ -28,23 +31,8 @@ export default class Home extends Component {
     render() { 
         const { active } = this.state;
         const { visible } = this.state;
-        const Data = DataHora('data')
-        console.log('home.js', DataHora('hours'))
-
-        const url = 'http://192.168.15.38:9090/v1/user/'
-        const handleTeste = async () => {
-            
-            axios.get(url)
-            .then((response) => {
-                console.log(response.data.message)
-                alert(response.data.message)
-            }) 
-            .catch(function (error) {
-                console.log('erro: ' + error) 
-                alert('erro: ' + error) 
-            })
-        }
-        //handleTeste()
+        const handleTeste = async () => Login('amaro', '1234')
+        const UserList = () => getUser()
         
 
         return (
@@ -88,7 +76,7 @@ export default class Home extends Component {
                                         </View>
                                     </View>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.item} onPress={() => alert('item:')}>
+                                <TouchableOpacity style={styles.item} onPress={UserList}>
                                     <Image source={require(`../../../assets/${3}.jpg`)} style={styles.ImgItem} />
                                     <View style={styles.DescriptionItem}>
                                         <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>

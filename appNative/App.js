@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
-import { COLOR, ThemeContext, getTheme, Snackbar } from 'react-native-material-ui'
-import Routes from './src/routes'
-import { Provider } from 'react-redux'
-import store from './src/store'
-import { AppLoading } from 'expo'
-import { Container, Text, Button } from 'native-base'
-import * as Font from 'expo-font'
+import { COLOR, ThemeContext, getTheme } from 'react-native-material-ui'
 import { Ionicons } from '@expo/vector-icons'
-import DataHora from './src/components/dataHora'
+import React, { Component } from 'react'
+import { Container } from 'native-base'
+import { Provider } from 'react-redux'
+import { AppLoading } from 'expo'
+import * as Font from 'expo-font'
+
+import Routes from './src/routes'
+import store from './src/store'
 
 
 export default class App extends Component {

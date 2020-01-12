@@ -1,16 +1,16 @@
-import React, { Component } from 'react'
 import { Router, Scene } from 'react-native-router-flux'
-import Home from './home/homePage'
-import About from './home/about'
-import AuthPage from './auth/authPage'
+import { useSelector, useDispatch } from 'react-redux'
+import React from 'react'
+
 import ForgotPassword from './auth/forgotPassword'
+import AuthPage from './auth/authPage'
 import NewUser from './auth/newUser'
 import Index from './auth/index'
-import ErrorPage from './error'
-import Teste from './auth/teste'
-import { useSelector, useDispatch } from 'react-redux'
-import Toolbar from '../components/toolbar'
 import BottonNav from '../components/bottonNav'
+import Toolbar from '../components/toolbar'
+import Teste from './auth/teste'
+import Home from './home/homePage'
+import About from './home/about'
 
 
 export default Routes = () => {
@@ -28,7 +28,6 @@ export default Routes = () => {
                   <Scene key = "home" component = {Home} hideNavBar = {true} initial = {true} />
                   <Scene key = "newUser" component = {NewUser} hideNavBar = {true} />
                   <Scene key = "about" component = {About} hideNavBar = {true} />
-                  <Scene key = "error" component = {ErrorPage} hideNavBar = {true} />
                </Scene>
             </Router>
             <BottonNav/>
@@ -46,7 +45,6 @@ export default Routes = () => {
                   <Scene key = "home" component = {Home} hideNavBar = {true} />
                   <Scene key = "newUser" component = {NewUser} hideNavBar = {true} />
                   <Scene key = "about" component = {About} hideNavBar = {true} />
-                  <Scene key = "error" component = {ErrorPage} hideNavBar = {true} />
                   <Scene key = "teste" component = {Teste} hideNavBar = {true} />
                </Scene> 
             </Router>

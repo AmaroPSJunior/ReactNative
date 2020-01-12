@@ -1,12 +1,12 @@
-import React from 'react'
 import { TouchableOpacity, Text, View, Dimensions, StyleSheet, Image, } from 'react-native'
+import { useSelector, useDispatch } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
-import TextInputCustom from '../../components/textInput';
-import { COLOR } from 'react-native-material-ui';
+import { COLOR } from 'react-native-material-ui'
+import React from 'react'
+
+import TextInputCustom from '../../components/textInput'
 import img from '../../../assets/logo.png'
-import { useSelector, useDispatch } from 'react-redux';
-import api from '../../services'
-import Axios from 'axios';
+import login from '../../services/login'
 
 
 export default Index = () => {
@@ -24,7 +24,7 @@ export default Index = () => {
    function authenticated () {
       dispatch(User(user))
       dispatch(Password(password))
-      reqAuthUser(user, password)
+      login(user, password)
       dispatch(changeAuthAction(true))
       dispatch(changeTockenAction(token))
    }
@@ -41,28 +41,8 @@ export default Index = () => {
       return { type: 'CHANGE_TOKEN', text } 
    }
 
-   const reqAuthUser = async (user, password) => {
-   
-      Axios.get('http://localhost:3003/')
-      //api.post('login', {
-      //    client_id: "houseflix_client",
-      //    client_secret: "92427ae41e4649b934e3b0c44298fc1c149afbf4c8996fbca495991b7852b855",
-      //    grant_type: "xpassword",
-      //    username: user,
-      //    password: password
-      // })
-      .then((response) => {
-         const { access_token } = response.data
-   
-         if (response.data.error) {
-            alert('teste' + response.data.error_description)
-         } 
-         alert('access_token: ' + access_token)
-      })
-      .catch(function (error) {
-        console.log('ER' + error) 
-        alert('ER' + error) 
-      })
+   const authUser = async (user, password) => {
+      login(user, password)
    }
 
    return (
