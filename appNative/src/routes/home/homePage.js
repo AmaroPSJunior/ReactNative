@@ -6,10 +6,10 @@ import React, { Component } from 'react'
 import Constants from 'expo-constants'
 
 import getUser from '../../services/getUser'
-import reqTesteApi from '../../services/reqTesteApi'
 import Login from '../../services/login'
 import Data from '../../components/dataHora'
-
+import PostSignUp from '../../services/postSignUp'
+        
 
 const Text2 = Paper.Text
 
@@ -31,8 +31,22 @@ export default class Home extends Component {
     render() { 
         const { active } = this.state;
         const { visible } = this.state;
-        const handleTeste = async () => Login('amaro', '1234')
-        const UserList = () => getUser()
+        const handleTeste = async () => alert('item 2')
+
+        const UserList = () => PostSignUp(
+            'teste da silva',
+            'teste@gmail.com',
+            'te',
+            '1234',
+            'rua da portal',
+            '2000',
+            'casa',
+            '12397060',
+            'village',
+            'cacapava',
+            'SP',
+            '1'
+        )
         
 
         return (
@@ -66,7 +80,7 @@ export default class Home extends Component {
                                         </View>
                                     </View>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.item} onPress={handleTeste}>
+                                <TouchableOpacity style={styles.item} >
                                     <Image source={require(`../../../assets/${2}.jpg`)} style={styles.ImgItem} />
                                     <View style={styles.DescriptionItem}>
                                         <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>

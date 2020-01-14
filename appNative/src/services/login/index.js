@@ -14,13 +14,13 @@ export default login = (user, password) => {
     const { access_token, data, error, error_description } = response.data
 
     if (error) {
-      alert('login: ' + error_description)
+      //alert('login: ' + error_description)
+      return error
     } 
-
-    return alert('login: ' + JSON.stringify(data))
+    //return alert('login: ' + JSON.stringify(data))
+    return alert(response.data)
   })
   .catch(function (error) {
-    console.log('ER' + error) 
-    alert('ER' + error) 
+    alert('login' + error) 
   })
 }

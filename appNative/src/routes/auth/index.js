@@ -12,21 +12,25 @@ import login from '../../services/login'
 export default Index = () => {
    const dispatch = useDispatch(); 
    const state = useSelector(state => state)
-   const [user, setUser] = React.useState('am');
+   const [user, setUser] = React.useState('te');
    const [password, setPassword] = React.useState('1234');
    const { token } = state
-   alert('token: ' + token)
    
-   const goToForgotPassword = () => {
+   const goToForgotPassword = async () => {
       Actions.forgotPassword()
    }
    
-   function authenticated () {
+   async function authenticated () {
       dispatch(User(user))
       dispatch(Password(password))
-      login(user, password)
-      dispatch(changeAuthAction(true))
-      dispatch(changeTockenAction(token))
+      
+      var teste = login(user, password)
+        await console.log(teste)
+      if (teste) {
+         
+         dispatch(changeAuthAction(true))
+         dispatch(changeTockenAction(token))
+      }
    }
    function User(text) {
       return { type: 'CHANGE_USER', text } 
