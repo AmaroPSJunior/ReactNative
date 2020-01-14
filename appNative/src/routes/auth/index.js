@@ -1,5 +1,4 @@
 import { TouchableOpacity, Text, View, Dimensions, StyleSheet, Image, } from 'react-native'
-import { useSelector, useDispatch } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import { COLOR } from 'react-native-material-ui'
 import React from 'react'
@@ -8,46 +7,13 @@ import TextInputCustom from '../../components/textInput'
 import img from '../../../assets/logo.png'
 import login from '../../services/login'
 
-
 export default Index = () => {
-   const dispatch = useDispatch(); 
-   const state = useSelector(state => state)
    const [user, setUser] = React.useState('te');
    const [password, setPassword] = React.useState('1234');
-   const { token } = state
    
-   const goToForgotPassword = async () => {
-      Actions.forgotPassword()
-   }
+   const goToForgotPassword = async () => Actions.forgotPassword()
    
-   async function authenticated () {
-      dispatch(User(user))
-      dispatch(Password(password))
-      
-      var teste = login(user, password)
-        await console.log(teste)
-      if (teste) {
-         
-         dispatch(changeAuthAction(true))
-         dispatch(changeTockenAction(token))
-      }
-   }
-   function User(text) {
-      return { type: 'CHANGE_USER', text } 
-   } 
-   function Password(text) {
-      return { type: 'CHANGE_PASSWORD', text } 
-   } 
-   function changeAuthAction (bool) {
-      return { type: 'CHANGE_AUTH', bool } 
-   }
-   function changeTockenAction (text) {
-      return { type: 'CHANGE_TOKEN', text } 
-   }
-
-   const authUser = async (user, password) => {
-      login(user, password)
-   }
+   const authenticated = () => login(user, password)
 
    return (
       <View style={styles.Container}>

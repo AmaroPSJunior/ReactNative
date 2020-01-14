@@ -1,7 +1,14 @@
 import api from '../';
-
+import { useSelector, useDispatch } from 'react-redux'
 
 export default login = (user, password) => {
+  const dispatch = useDispatch(); 
+
+  const User = (text) => { return { type: 'CHANGE_USER', text }}
+  const Password = (text) => { return { type: 'CHANGE_PASSWORD', text }}
+  const changeAuthAction = (bool) => { return { type: 'CHANGE_AUTH', bool }}
+  const changeTockenAction = (text) => { return { type: 'CHANGE_TOKEN', text }}
+  
 
   api.post('login', {
      client_id: "houseflix_client",
@@ -11,16 +18,21 @@ export default login = (user, password) => {
      password: password
   })
   .then((response) => {
-    const { access_token, data, error, error_description } = response.data
+    const { access_token, error, error_description } = response.data
 
     if (error) {
-      //alert('login: ' + error_description)
+      alert('login: ' + error_description)
       return error
     } 
-    //return alert('login: ' + JSON.stringify(data))
-    return alert(response.data)
+
+    alert('login: ' + JSON.stringify(response.data))
+
+    dispatch(User(user))
+    dispatch(Password(password))
+    dispatch(changeAuthAction(true))
+    dispatch(changeTockenAction(access_token))
   })
   .catch(function (error) {
-    alert('login' + error) 
+    alert('login: ' + error) 
   })
 }

@@ -1,4 +1,5 @@
 import { COLOR, ThemeContext, getTheme } from 'react-native-material-ui'
+import { useSelector, useDispatch } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons'
 import React, { Component } from 'react'
 import { Container } from 'native-base'
@@ -25,9 +26,13 @@ export default class App extends Component {
       ...Ionicons.font,
     });
     this.setState({ isReady: true });
+
+    const state = useSelector(state => state)
+    console.log('api: ' + state())
   }
 
   render() {
+
     if (!this.state.isReady) {
       return <AppLoading/>;
     }

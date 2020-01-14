@@ -42,6 +42,7 @@ export default postSignUp = (
     alert('postSignUp: ' + response.data.message)
   })
   .catch(function (error) {
+    console.log(error)
     alert('postSignUp: ' + error)
   })
 }

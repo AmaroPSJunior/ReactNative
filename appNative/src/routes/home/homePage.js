@@ -31,7 +31,9 @@ export default class Home extends Component {
     render() { 
         const { active } = this.state;
         const { visible } = this.state;
-        const handleTeste = async () => alert('item 2')
+        const UserLogin = async () => {
+            Login('te', '1234')
+        }
 
         const UserList = () => PostSignUp(
             'teste da silva',
@@ -80,7 +82,7 @@ export default class Home extends Component {
                                         </View>
                                     </View>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.item} >
+                                <TouchableOpacity style={styles.item} onPress={UserLogin}>
                                     <Image source={require(`../../../assets/${2}.jpg`)} style={styles.ImgItem} />
                                     <View style={styles.DescriptionItem}>
                                         <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>

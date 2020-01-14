@@ -8,7 +8,7 @@ const INITIAL_STATE = {
   itens: [ 'amaro', 'pedro', 'junior'],
   user: null,
   password: null,
-  tokem: '',
+  access_token: '',
 };
 
 
@@ -19,7 +19,7 @@ function list(state = INITIAL_STATE, action) {
     case 'CHANGE_AUTH': return { ...state, authenticated: action.bool };
     case 'CHANGE_USER': return { ...state, user: action.text };
     case 'CHANGE_PASSWORD': return { ...state, password: action.text };
-    case 'CHANGE_TOKEN': return { ...state, tokem: action.text };
+    case 'CHANGE_TOKEN': return { ...state, access_token: action.text };
     default: return state;
   }
 } 
