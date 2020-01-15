@@ -8,7 +8,6 @@ import NewUser from './auth/newUser'
 import Index from './auth/index'
 import BottonNav from '../components/bottonNav'
 import Toolbar from '../components/toolbar'
-import Teste from './auth/teste'
 import Home from './home/homePage'
 import About from './home/about'
 
@@ -45,7 +44,6 @@ export default Routes = () => {
                   <Scene key = "home" component = {Home} hideNavBar = {true} />
                   <Scene key = "newUser" component = {NewUser} hideNavBar = {true} />
                   <Scene key = "about" component = {About} hideNavBar = {true} />
-                  <Scene key = "teste" component = {Teste} hideNavBar = {true} />
                </Scene> 
             </Router>
          </>

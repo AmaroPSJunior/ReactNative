@@ -1,19 +1,59 @@
 import { TouchableOpacity, Text, View, Dimensions, StyleSheet, Image, } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { COLOR } from 'react-native-material-ui'
+import { useSelector, useDispatch } from 'react-redux'
 import React from 'react'
 
 import TextInputCustom from '../../components/textInput'
 import img from '../../../assets/logo.png'
 import login from '../../services/login'
+import getUser from '../../services/getUser'
 
 export default Index = () => {
    const [user, setUser] = React.useState('te');
    const [password, setPassword] = React.useState('1234');
    
    const goToForgotPassword = async () => Actions.forgotPassword()
+   const dispatch = useDispatch()
    
-   const authenticated = () => login(user, password)
+    function authenticated() {
+      
+      login(user, password, dispatch)
+      
+      // api.post('login', {
+      //    client_id: "houseflix_client",
+      //    client_secret: "92427ae41e4649b934e3b0c44298fc1c149afbf4c8996fbca495991b7852b855",
+      //    grant_type: "xpassword",
+      //    username: user,
+      //    password: password
+      //  })
+      //  .then(function(response) {
+         
+      //    const { access_token, error, error_description } = response.data
+      
+      //    function User(text) { return { type: 'CHANGE_USER', text }}
+      //    function Password(text) { return { type: 'CHANGE_PASSWORD', text }}
+      //    function changeAuthAction(bool) { return { type: 'CHANGE_AUTH', bool }}
+      //    function changeTockenAction(text) { return { type: 'CHANGE_TOKEN', text }}
+         
+      //    if (error) {
+      //      return alert('login1: ' + error_description)
+      //    } 
+         
+      //    alert('login: ' + JSON.stringify(access_token))
+      //    //return access_token
+         
+      //    dispatch(User(user))
+      //    dispatch(Password(password))
+      //    dispatch(changeAuthAction(true))
+      //    dispatch(changeTockenAction(access_token))
+      //  })
+      //  .catch(function (error) {
+      //    console.log('login2: ' + error) 
+      //    alert('login2: ' + error) 
+      //  })
+   }
+   //const authenticated = () => getUser()
 
    return (
       <View style={styles.Container}>

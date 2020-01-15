@@ -11,7 +11,7 @@ export default logout = (access_token) => {
   .then((response) => {
 
     if (error) {
-      alert('logout: ' + error_description)
+      alert('logout: ' + error)
       return error
     } 
     return alert('logout: ' + JSON.stringify(data))
