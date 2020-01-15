@@ -1,9 +1,9 @@
 import { TouchableOpacity, Text, View, Dimensions, StyleSheet, Image, ScrollView, SafeAreaView } from 'react-native'
-import { Modal, Portal, Provider } from 'react-native-paper'
+import { useSelector, useDispatch } from 'react-redux'
+import { Portal, Provider } from 'react-native-paper'
 import { COLOR } from 'react-native-material-ui'
-import * as Paper from 'react-native-paper'
-import React, { Component } from 'react'
 import Constants from 'expo-constants'
+import React from 'react'
 
 import getUser from '../../services/getUser'
 import Login from '../../services/login'
@@ -11,31 +11,12 @@ import Data from '../../components/dataHora'
 import PostSignUp from '../../services/postSignUp'
         
 
-const Text2 = Paper.Text
 
-export default class Home extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            item: null,
-            error: null,
-            data: [ 'pedro', 'amaro', 'junior' ], 
-            visible: false,
-            active: 'first',
-        };
-    }
-
-    _showModal = () => this.setState({ visible: true });
-    _hideModal = () => this.setState({ visible: false });
-
-    render() { 
-        const { active } = this.state;
-        const { visible } = this.state;
-        const UserLogin = async () => {
-            Login('te', '1234')
-        }
-
-        const UserList = () => PostSignUp(
+export default function Home() {
+    const access_token = useSelector(state => state.access_token);
+    
+    function UserList() {
+        PostSignUp(
             'teste da silva',
             'teste@gmail.com',
             'te',
@@ -49,67 +30,67 @@ export default class Home extends Component {
             'SP',
             '1'
         )
-        
+    } 
 
-        return (
+    function UserLogin() { Login('te', '1234') }
+    function lertoken() { console.log('access_token: ' + access_token) }
 
-            <Provider>
-                <Portal>
-                    <Modal visible={visible} onDismiss={this._hideModal} style={styles.Modal}>
-                        <Text2>Example Modal</Text2>
-                    </Modal>
-                    <View style={styles.container}>
-                        <SafeAreaView style={styles.Header}>
-                            <ScrollView style={styles.scrollView} horizontal={true}>
-                                <Text style={styles.text}>item</Text>
-                                <Text style={styles.text}>item</Text>
-                                <Text style={styles.text}>item</Text>
-                                <Text style={styles.text}>item</Text>
-                                <Text style={styles.text}>item</Text>
-                                <Text style={styles.text}>item</Text>
-                            </ScrollView>
-                        </SafeAreaView>
-                        <SafeAreaView style={styles.Content}>
-                            <ScrollView style={styles.scrollView}>
 
-                                <TouchableOpacity style={styles.item} onPress={this._showModal}>
-                                    <Image source={require(`../../../assets/${1}.jpg`)} style={styles.ImgItem} />
-                                    <View style={styles.DescriptionItem}>
-                                        <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
-                                        <View style={styles.FooterItem}>
-                                            <Text style={styles.TitleFooterItem}>Title</Text>
-                                            <Text style={styles.DataFooterItem}>{Data}</Text>
-                                        </View>
+    return (
+
+        <Provider>
+            <Portal>
+                <View style={styles.container}>
+                    <SafeAreaView style={styles.Header}>
+                        <ScrollView style={styles.scrollView} horizontal={true}>
+                            <Text style={styles.text}>item</Text>
+                            <Text style={styles.text}>item</Text>
+                            <Text style={styles.text}>item</Text>
+                            <Text style={styles.text}>item</Text>
+                            <Text style={styles.text}>item</Text>
+                            <Text style={styles.text}>item</Text>
+                        </ScrollView>
+                    </SafeAreaView>
+                    <SafeAreaView style={styles.Content}>
+                        <ScrollView style={styles.scrollView}>
+
+                            <TouchableOpacity style={styles.item} onPress={lertoken}>
+                                <Image source={require(`../../../assets/${1}.jpg`)} style={styles.ImgItem} />
+                                <View style={styles.DescriptionItem}>
+                                    <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
+                                    <View style={styles.FooterItem}>
+                                        <Text style={styles.TitleFooterItem}>Title</Text>
+                                        <Text style={styles.DataFooterItem}>{Data}</Text>
                                     </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.item} onPress={UserLogin}>
-                                    <Image source={require(`../../../assets/${2}.jpg`)} style={styles.ImgItem} />
-                                    <View style={styles.DescriptionItem}>
-                                        <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
-                                        <View style={styles.FooterItem}>
-                                            <Text style={styles.TitleFooterItem}>Title</Text>
-                                            <Text style={styles.DataFooterItem}>{Data}</Text>
-                                        </View>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.item} onPress={UserLogin}>
+                                <Image source={require(`../../../assets/${2}.jpg`)} style={styles.ImgItem} />
+                                <View style={styles.DescriptionItem}>
+                                    <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
+                                    <View style={styles.FooterItem}>
+                                        <Text style={styles.TitleFooterItem}>Title</Text>
+                                        <Text style={styles.DataFooterItem}>{Data}</Text>
                                     </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.item} onPress={UserList}>
-                                    <Image source={require(`../../../assets/${3}.jpg`)} style={styles.ImgItem} />
-                                    <View style={styles.DescriptionItem}>
-                                        <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
-                                        <View style={styles.FooterItem}>
-                                            <Text style={styles.TitleFooterItem}>Title</Text>
-                                            <Text style={styles.DataFooterItem}>{Data}</Text>
-                                        </View>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.item} onPress={UserList}>
+                                <Image source={require(`../../../assets/${3}.jpg`)} style={styles.ImgItem} />
+                                <View style={styles.DescriptionItem}>
+                                    <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
+                                    <View style={styles.FooterItem}>
+                                        <Text style={styles.TitleFooterItem}>Title</Text>
+                                        <Text style={styles.DataFooterItem}>{Data}</Text>
                                     </View>
-                                </TouchableOpacity>
-                                
-                            </ScrollView>
-                        </SafeAreaView>
-                    </View>
-                </Portal>
-            </Provider>
-        )
-    }
+                                </View>
+                            </TouchableOpacity>
+                            
+                        </ScrollView>
+                    </SafeAreaView>
+                </View>
+            </Portal>
+        </Provider>
+    )
 }
 
 const ScreenHeight = Dimensions.get("window").height
