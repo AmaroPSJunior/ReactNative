@@ -16,6 +16,7 @@ export default function Home() {
     const access_token = useSelector(state => state.access_token);
     
     function UserList() {
+        debugger;
         PostSignUp(
             'teste da silva',
             'teste@gmail.com',
@@ -32,7 +33,7 @@ export default function Home() {
         )
     } 
 
-    function UserLogin() { Login('te', '1234') }
+    function UserLogin() { Login('amaro', '1234') }
     function lertoken() { console.log('access_token: ' + access_token) }
 
 

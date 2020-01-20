@@ -4,60 +4,71 @@ import { Toolbar } from 'react-native-material-ui';
 import { Actions } from 'react-native-router-flux'
 import { useSelector, useDispatch } from 'react-redux';
 import api from '../../services'
+import Logout from '../../services/Logout'
 
-const reqLogoutUser = async () => {
-    const state = useSelector(state => state)
-    const { token } = state
-    console.log('token', token)
+
+// const reqLogoutUser = async () => {
+//     const state = useSelector(state => state)
+//     const { token } = state
+//     console.log('token', token)
   
-    alert('teste')
+//     alert('teste')
 
-    api.post('logout/' + access_token)
-    .then((response) => {
+//     api.post('logout/' + access_token)
+//     .then((response) => {
  
-       alert(response.data)
-    })
-    .then((response) => {
-       const { access_token } = response.data
+//        alert(response.data)
+//     })
+//     .then((response) => {
+//        const { access_token } = response.data
  
-       if (response.data.error) {
-          alert(response.data.error_description)
-       } 
+//        if (response.data.error) {
+//           alert(response.data.error_description)
+//        } 
        
-       alert('access_token: ' + access_token)
+//        alert('access_token: ' + access_token)
  
-    })
-    .catch(function (error) {
-      console.log('ER' + error) 
-    })
- }
+//     })
+//     .catch(function (error) {
+//       console.log('ER' + error) 
+//     })
+// }
 
-export default ToolbarCustom = () => {
+
+export default function ToolbarCustom() {
+    //const state = useSelector(state => state)
+    //const { access_token } = state
+    const access_token = useSelector(state => state.access_token);
+
+
     state = {
         ListItem: null,
         pesquisa: null,
     };
-
+    
     const dispatch = useDispatch();
-
+    
     function goToIndex () {
         dispatch(changeAuthAction(false))
         Actions.index()
     }
-
+    
     function changeAuthAction (bool) {
         return { type: 'CHANGE_AUTH', bool }
     }
-
+    
     const listFunction = ( index ) => {
-        
+    
+
         if ( index == 0 ) {
             alert('selecionado item 1')    
         } else if ( index == 1 ) {
             alert('selecionado item 2')    
         }else if ( index == 2 ) {
-            reqLogoutUser()
-            goToIndex() 
+            //reqLogoutUser()
+            goToIndex()
+            
+            Logout(access_token)
         }
     }
 

@@ -6,11 +6,15 @@ const INITIAL_STATE = {
   process: ['process'],
   authenticated: false,
   itens: [ 'amaro', 'pedro', 'junior'],
-  user: null,
   password: null,
   access_token: '',
+  admin: null,
+  user: null,
+  project: null,
+  phase: null,
+  process: null,
+  image: null,
 };
-
 
 function list(state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -20,6 +24,11 @@ function list(state = INITIAL_STATE, action) {
     case 'CHANGE_USER': return { ...state, user: action.text };
     case 'CHANGE_PASSWORD': return { ...state, password: action.text };
     case 'CHANGE_TOKEN': return { ...state, access_token: action.text };
+    case 'CHANGE_ADMIN': return { ...state, admin: action.text };
+    case 'CHANGE_PROJECT': return { ...state, project: action.text };
+    case 'CHANGE_PHASE': return { ...state, phase: action.text };
+    case 'CHANGE_PROCESS': return { ...state, process: action.text };
+    case 'CHANGE_IMAGE': return { ...state, image: action.text };
     default: return state;
   }
 } 

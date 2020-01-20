@@ -1,5 +1,4 @@
 import api from '../';
-import { useSelector, useDispatch } from 'react-redux'
 
 export default function login(user, password, dispatch) {
   
@@ -29,7 +28,7 @@ export default function login(user, password, dispatch) {
     dispatch(changeAuthAction(true))
     dispatch(changeTockenAction(access_token))
     
-    alert('login: ' + JSON.stringify(access_token))
+    alert('login: ' + JSON.stringify(response.data.access_token))
   })
   .catch(function (error) {
     console.log('login2: ' + error) 
