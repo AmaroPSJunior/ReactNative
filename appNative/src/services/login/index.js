@@ -1,4 +1,5 @@
-import api from '../';
+import api from '../'
+import getUser from '../getUser'
 
 export default function login(user, password, dispatch) {
   
@@ -10,24 +11,18 @@ export default function login(user, password, dispatch) {
     password: password
   })
   .then(function(response) {
-    const { access_token, error, error_description } = response.data
-
-    function User(obj) { return { type: 'CHANGE_USER', obj }}
-    //function Password(text) { return { type: 'CHANGE_PASSWORD', text }}
     function changeAuthAction(bool) { return { type: 'CHANGE_AUTH', bool }}
-    //function changeTockenAction(text) { return { type: 'CHANGE_TOKEN', text }}
-    
-    dispatch(User(response.data))
-    //dispatch(Password(password))
+    function Login(obj) { return { type: 'CHANGE_LOGIN', obj }}
+    dispatch(Login(response.data))
     dispatch(changeAuthAction(true))
-    //dispatch(changeTockenAction(access_token))
     
-    return alert('login:2 ' + JSON.stringify(response.data.access_token))
-
+    getUser(response.data.access_token, dispatch, 'x') 
+    
+    console.log('login res: ' + JSON.stringify(response.data.access_token))
   })
   .catch(function (error) {
 
-    console.log('login2: ' + error) 
+    console.log('login err: ' + error) 
     alert('login2: ' + error) 
   })
 

@@ -6,15 +6,17 @@ import Constants from 'expo-constants'
 import React from 'react'
 
 import getUser from '../../services/getUser'
+import getProjects from '../../services/getProject'
+import getPhase from '../../services/getPhase'
 import Login from '../../services/login'
-import Projects from '../../services/getProject'
 import Data from '../../components/dataHora'
 import PostSignUp from '../../services/postSignUp'
         
 
 
 export default function Home() {
-    const state = useSelector(state => state);
+    const { admin, login, user, project, phase, process, image, ...state } = useSelector(state => state);
+
     const dispatch = useDispatch()
     
     function SignUp() {
@@ -35,12 +37,17 @@ export default function Home() {
     } 
 
     function UserLogin() { Login('amaro', '1234', dispatch) }
-    function ReadState() { console.log('state: ', state.user) }
-    function ProjectList() { Projects(state.user.access_token, dispatch) }
-
+    function ReadState() { console.log('state: ', state) }
+    //function ProjectList() { Projects(state.user.access_token, dispatch) }
+    function ProjectList() { 
+        // const hash_project = user[0].hash_project
+        // const access_token = login.access_token
+        // console.log(hash_project, access_token, dispatch)
+        console.log(user)
+    }
+    
 
     return (
-
         <Provider>
             <Portal>
                 <View style={styles.container}>

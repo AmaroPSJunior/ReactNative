@@ -1,16 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { StyleSheet } from 'react-native'
 import { Toolbar } from 'react-native-material-ui';
 import { Actions } from 'react-native-router-flux'
 import { useSelector, useDispatch } from 'react-redux';
-import api from '../../services'
 import Logout from '../../services/Logout'
 
 
 export default function ToolbarCustom() {
-    //const state = useSelector(state => state)
-    //const { access_token } = state
-    const access_token = useSelector(state => state.user.access_token);
     const dispatch = useDispatch();
 
     state = {
@@ -28,8 +24,8 @@ export default function ToolbarCustom() {
         return { type: 'CHANGE_AUTH', bool }
     }
     
-    const listFunction = ( index ) => {
-    
+    function listFunction(index) {
+        const access_token = useSelector(state => state.user.access_token);
 
         if ( index == 0 ) {
             alert('selecionado item 1')    
@@ -37,9 +33,8 @@ export default function ToolbarCustom() {
             alert('selecionado item 2')    
         }else if ( index == 2 ) {
             //reqLogoutUser()
-            goToIndex()
-            
             Logout(access_token)
+            goToIndex()
         }
     }
 

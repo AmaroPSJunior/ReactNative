@@ -6,9 +6,10 @@ const INITIAL_STATE = {
   process: ['process'],
   authenticated: false,
   itens: [ 'amaro', 'pedro', 'junior'],
-  password: null,
-  access_token: '',
+  //password: null,
+  //access_token: '',
   admin: null,
+  login: null,
   user: null,
   project: null,
   phase: null,
@@ -21,9 +22,9 @@ function list(state = INITIAL_STATE, action) {
     case 'ADD_COURSE': return { ...state, data: [...state.data, action.title] };
     case 'ADD_ITEM': return { ...state, process: [...state.process, action.title] };
     case 'CHANGE_AUTH': return { ...state, authenticated: action.bool };
+    case 'CHANGE_LOGIN': return { ...state, login: action.obj };
     case 'CHANGE_USER': return { ...state, user: action.obj };
-  case 'CHANGE_PASSWORD': return { ...state, password: action.text };
-    case 'CHANGE_TOKEN': return { ...state, access_token: action.text };
+    //case 'CHANGE_TOKEN': return { ...state, access_token: action.text };
     case 'CHANGE_ADMIN': return { ...state, admin: action.obj };
     case 'CHANGE_PROJECT': return { ...state, project: action.obj };
     case 'CHANGE_PHASE': return { ...state, phase: action.obj };
