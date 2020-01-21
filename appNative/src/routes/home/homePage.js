@@ -7,20 +7,21 @@ import React from 'react'
 
 import getUser from '../../services/getUser'
 import Login from '../../services/login'
+import Projects from '../../services/getProject'
 import Data from '../../components/dataHora'
 import PostSignUp from '../../services/postSignUp'
         
 
 
 export default function Home() {
-    const access_token = useSelector(state => state.access_token);
+    const state = useSelector(state => state);
+    const dispatch = useDispatch()
     
-    function UserList() {
-        debugger;
+    function SignUp() {
         PostSignUp(
-            'teste da silva',
-            'teste@gmail.com',
-            'te',
+            'amaro silva',
+            'arcamos.j@gmail.com',
+            'amaro',
             '1234',
             'rua da portal',
             '2000',
@@ -33,8 +34,9 @@ export default function Home() {
         )
     } 
 
-    function UserLogin() { Login('amaro', '1234') }
-    function lertoken() { console.log('access_token: ' + access_token) }
+    function UserLogin() { Login('amaro', '1234', dispatch) }
+    function ReadState() { console.log('state: ', state.user) }
+    function ProjectList() { Projects(state.user.access_token, dispatch) }
 
 
     return (
@@ -55,7 +57,7 @@ export default function Home() {
                     <SafeAreaView style={styles.Content}>
                         <ScrollView style={styles.scrollView}>
 
-                            <TouchableOpacity style={styles.item} onPress={lertoken}>
+                            <TouchableOpacity style={styles.item} onPress={ReadState}>
                                 <Image source={require(`../../../assets/${1}.jpg`)} style={styles.ImgItem} />
                                 <View style={styles.DescriptionItem}>
                                     <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
@@ -75,8 +77,18 @@ export default function Home() {
                                     </View>
                                 </View>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.item} onPress={UserList}>
+                            <TouchableOpacity style={styles.item} onPress={SignUp}>
                                 <Image source={require(`../../../assets/${3}.jpg`)} style={styles.ImgItem} />
+                                <View style={styles.DescriptionItem}>
+                                    <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
+                                    <View style={styles.FooterItem}>
+                                        <Text style={styles.TitleFooterItem}>Title</Text>
+                                        <Text style={styles.DataFooterItem}>{Data}</Text>
+                                    </View>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.item} onPress={ProjectList}>
+                                <Image source={require(`../../../assets/${4}.jpg`)} style={styles.ImgItem} />
                                 <View style={styles.DescriptionItem}>
                                     <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
                                     <View style={styles.FooterItem}>

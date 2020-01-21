@@ -10,7 +10,7 @@ import login from '../../services/login'
 import getUser from '../../services/getUser'
 
 export default Index = () => {
-   const [user, setUser] = React.useState('te');
+   const [user, setUser] = React.useState('amaro');
    const [password, setPassword] = React.useState('1234');
    
    const goToForgotPassword = async () => Actions.forgotPassword()

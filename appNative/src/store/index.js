@@ -21,14 +21,14 @@ function list(state = INITIAL_STATE, action) {
     case 'ADD_COURSE': return { ...state, data: [...state.data, action.title] };
     case 'ADD_ITEM': return { ...state, process: [...state.process, action.title] };
     case 'CHANGE_AUTH': return { ...state, authenticated: action.bool };
-    case 'CHANGE_USER': return { ...state, user: action.text };
-    case 'CHANGE_PASSWORD': return { ...state, password: action.text };
+    case 'CHANGE_USER': return { ...state, user: action.obj };
+  case 'CHANGE_PASSWORD': return { ...state, password: action.text };
     case 'CHANGE_TOKEN': return { ...state, access_token: action.text };
-    case 'CHANGE_ADMIN': return { ...state, admin: action.text };
-    case 'CHANGE_PROJECT': return { ...state, project: action.text };
-    case 'CHANGE_PHASE': return { ...state, phase: action.text };
-    case 'CHANGE_PROCESS': return { ...state, process: action.text };
-    case 'CHANGE_IMAGE': return { ...state, image: action.text };
+    case 'CHANGE_ADMIN': return { ...state, admin: action.obj };
+    case 'CHANGE_PROJECT': return { ...state, project: action.obj };
+    case 'CHANGE_PHASE': return { ...state, phase: action.obj };
+    case 'CHANGE_PROCESS': return { ...state, process: action.obj };
+    case 'CHANGE_IMAGE': return { ...state, image: action.obj };
     default: return state;
   }
 } 

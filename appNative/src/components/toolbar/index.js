@@ -7,46 +7,17 @@ import api from '../../services'
 import Logout from '../../services/Logout'
 
 
-// const reqLogoutUser = async () => {
-//     const state = useSelector(state => state)
-//     const { token } = state
-//     console.log('token', token)
-  
-//     alert('teste')
-
-//     api.post('logout/' + access_token)
-//     .then((response) => {
- 
-//        alert(response.data)
-//     })
-//     .then((response) => {
-//        const { access_token } = response.data
- 
-//        if (response.data.error) {
-//           alert(response.data.error_description)
-//        } 
-       
-//        alert('access_token: ' + access_token)
- 
-//     })
-//     .catch(function (error) {
-//       console.log('ER' + error) 
-//     })
-// }
-
-
 export default function ToolbarCustom() {
     //const state = useSelector(state => state)
     //const { access_token } = state
-    const access_token = useSelector(state => state.access_token);
-
+    const access_token = useSelector(state => state.user.access_token);
+    const dispatch = useDispatch();
 
     state = {
         ListItem: null,
         pesquisa: null,
     };
     
-    const dispatch = useDispatch();
     
     function goToIndex () {
         dispatch(changeAuthAction(false))
