@@ -15,7 +15,7 @@ import PostSignUp from '../../services/postSignUp'
 
 
 export default function Home() {
-    const { admin, login, user, project, phase, process, image, ...state } = useSelector(state => state)
+    const { admin, login, user, project, phase, process, image, ...state } = useSelector(state => state);
 
     const dispatch = useDispatch()
     
@@ -38,30 +38,15 @@ export default function Home() {
 
     function UserLogin() { Login('amaro', '1234', dispatch) }
     function ReadState() { console.log('state: ', state) }
-
-    function ItemList(data = false) { 
-        const phases = user.user.project.phase;
-        console.log('teste', phases)
-         
-        if (data) {
-            return phases.map((phase) =>
-                <Text style={styles.text}>{phase.name}</Text>
-            )
-        } else {
-            return phases.process.map((p) =>
-                <TouchableOpacity style={styles.item} onPress={ReadState}>
-                    <Image source={require(`../../../assets/${1}.jpg`)} style={styles.ImgItem} />
-                    <View style={styles.DescriptionItem}>
-                        <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
-                        <View style={styles.FooterItem}>
-                            <Text style={styles.TitleFooterItem}>Title</Text>
-                            <Text style={styles.DataFooterItem}>{Data}</Text>
-                        </View>
-                    </View>
-                </TouchableOpacity>
-            )
-        }
+    //function ProjectList() { Projects(state.user.access_token, dispatch) }
+    function ProjectList() { 
+        // const hash_project = user[0].hash_project
+        // const access_token = login.access_token
+        // console.log(hash_project, access_token, dispatch)
+        //console.log(user.user.project.phase)
+        console.log(user.user.project.phase[1].process[0]);
     }
+    
 
     return (
         <Provider>
@@ -69,15 +54,18 @@ export default function Home() {
                 <View style={styles.container}>
                     <SafeAreaView style={styles.Header}>
                         <ScrollView style={styles.scrollView} horizontal={true}>
-                            <ItemList data={true}/> 
+                            <Text style={styles.text}>item</Text>
+                            <Text style={styles.text}>item</Text>
+                            <Text style={styles.text}>item</Text>
+                            <Text style={styles.text}>item</Text>
+                            <Text style={styles.text}>item</Text>
+                            <Text style={styles.text}>item</Text>
                         </ScrollView>
                     </SafeAreaView>
                     <SafeAreaView style={styles.Content}>
                         <ScrollView style={styles.scrollView}>
 
-                            <ItemList data={false}/> 
-
-                            {/* <TouchableOpacity style={styles.item} onPress={ReadState}>
+                            <TouchableOpacity style={styles.item} onPress={ReadState}>
                                 <Image source={require(`../../../assets/${1}.jpg`)} style={styles.ImgItem} />
                                 <View style={styles.DescriptionItem}>
                                     <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
@@ -107,7 +95,7 @@ export default function Home() {
                                     </View>
                                 </View>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.item} onPress={ItemList}>
+                            <TouchableOpacity style={styles.item} onPress={ProjectList}>
                                 <Image source={require(`../../../assets/${4}.jpg`)} style={styles.ImgItem} />
                                 <View style={styles.DescriptionItem}>
                                     <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
@@ -116,7 +104,7 @@ export default function Home() {
                                         <Text style={styles.DataFooterItem}>{Data}</Text>
                                     </View>
                                 </View>
-                            </TouchableOpacity> */}
+                            </TouchableOpacity>
                             
                         </ScrollView>
                     </SafeAreaView>

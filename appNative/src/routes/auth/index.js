@@ -13,11 +13,10 @@ export default Index = () => {
    const [user, setUser] = React.useState('amaro');
    const [password, setPassword] = React.useState('1234');
    
-   const goToForgotPassword = async () => Actions.forgotPassword()
-      const dispatch = useDispatch()
-   
-      function authenticated() {
-      
+   const goToForgotPassword = () => Actions.forgotPassword()
+   const dispatch = useDispatch()
+
+   function authenticated() {
       login(user, password, dispatch)
    }
 

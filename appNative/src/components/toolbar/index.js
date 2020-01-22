@@ -7,25 +7,18 @@ import Logout from '../../services/Logout'
 
 
 export default function ToolbarCustom() {
+    state = { ListItem: null, pesquisa: null }
+    const access_token = useSelector(state => state.user.access_token);
     const dispatch = useDispatch();
+    
+    function changeAuthAction (bool) { return { type: 'CHANGE_AUTH', bool }}
 
-    state = {
-        ListItem: null,
-        pesquisa: null,
-    };
-    
-    
     function goToIndex () {
         dispatch(changeAuthAction(false))
         Actions.index()
     }
     
-    function changeAuthAction (bool) {
-        return { type: 'CHANGE_AUTH', bool }
-    }
-    
     function listFunction(index) {
-        const access_token = useSelector(state => state.user.access_token);
 
         if ( index == 0 ) {
             alert('selecionado item 1')    
@@ -34,7 +27,7 @@ export default function ToolbarCustom() {
         }else if ( index == 2 ) {
             //reqLogoutUser()
             Logout(access_token)
-            goToIndex()
+            goToIndex(dispatch)
         }
     }
 
@@ -44,34 +37,24 @@ export default function ToolbarCustom() {
             leftElement="menu"
             centerElement="Pesquisar"
             searchable={{ 
-            autoFocus: true, 
-            placeholder: 'Digite...',  
-                onLeftElementPress: () => { console.log('teste'); alert('chama menu') },
-                onChangeText: () => { console.log('digitou') },
-                onSearchClosed: () => { console.log('fechou') },
-                onSearchCloseRequested: () => { console.log('clicou em fechar') },
-                onSearchPressed: () => { console.log('clicou em pesquisar') },
-                onSubmitEditing: (obj) => { 
-                    this.setState({ pesquisa: obj.nativeEvent.text })
-                    setTimeout(() => {
-                    console.log('Pesquisou:', this.state.pesquisa) 
-                    }, 300);
-                },
+                autoFocus: true, 
+                placeholder: 'Digite...',  
+                    onLeftElementPress: () => { console.log('teste'); alert('chama menu') },
+                    onChangeText: () => { console.log('digitou') },
+                    onSearchClosed: () => { console.log('fechou') },
+                    onSearchCloseRequested: () => { console.log('clicou em fechar') },
+                    onSearchPressed: () => { console.log('clicou em pesquisar') },
+                    onSubmitEditing: (obj) => { 
+                        this.setState({ pesquisa: obj.nativeEvent.text })
+                        setTimeout(() => {
+                        console.log('Pesquisou:', this.state.pesquisa) 
+                        }, 300);
+                    },
+                }}
+                rightElement={{ menu: { icon: "more-vert", labels: ["item 1", "item 2", "Sair"] }}}
+                onRightElementPress={ ( label ) => { 
+                listFunction( label.index )  
             }}
-            rightElement={{ menu: { icon: "more-vert", labels: ["item 1", "item 2", "Sair"] }}}
-            onRightElementPress={ ( label ) => { 
-            //this.setState({ ListItem: label.index + 1 })
-            //console.log('item', this.state.ListItem)
-            //console.log('../toolbar label: ', label )
-            listFunction( label.index )
-                
-            }}
-            
-            // placeholder={ '' }
-            // autoFocus={ true }
-            // autoCapitalize={ '' }
-            // autoCorrect={ true }
-            // icon={ '' }
         />
     )
 }

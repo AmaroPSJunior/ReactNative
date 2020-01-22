@@ -11,12 +11,12 @@ export default function login(user, password, dispatch) {
     password: password
   })
   .then(function(response) {
-    function changeAuthAction(bool) { return { type: 'CHANGE_AUTH', bool }}
+    //function changeAuthAction(bool) { return { type: 'CHANGE_AUTH', bool }}
     function Login(obj) { return { type: 'CHANGE_LOGIN', obj }}
     dispatch(Login(response.data))
-    dispatch(changeAuthAction(true))
-    
     getUser(response.data.access_token, dispatch, 'x') 
+    
+    //dispatch(changeAuthAction(true))
     
     console.log('login res: ' + JSON.stringify(response.data.access_token))
   })

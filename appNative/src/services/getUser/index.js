@@ -7,12 +7,17 @@ export default getUsers = (access_token, dispatch, id = null) => {
       Authorization: `Bearer ${access_token}`  
     } 
   })
-  .then((response) => {
+  .then(async (response) => {
+    function changeAuthAction(bool) { return { type: 'CHANGE_AUTH', bool }}
     function User(obj) { return { type: 'CHANGE_USER', obj }}
     dispatch(User(response.data))
-    
-    return alert('getUser: ' + JSON.stringify(response.data))
+    dispatch(changeAuthAction(true))
+    //alert('getUser: ' + JSON.stringify(response.data.user))
   })
+  // .then(() => {
+  //   function changeAuthAction(bool) { return { type: 'CHANGE_AUTH', bool }}
+  //   dispatch(changeAuthAction(true))
+  // })
   .catch(function (error) {
     alert('getUser: ' + error) 
     console.log(error)
