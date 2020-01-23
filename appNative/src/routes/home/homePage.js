@@ -6,45 +6,46 @@ import Constants from 'expo-constants'
 import React from 'react'
 
 import getUser from '../../services/getUser'
+import getImg from '../../services/getImg'
 import getProjects from '../../services/getProject'
 import getPhase from '../../services/getPhase'
 import Login from '../../services/login'
 import Data from '../../components/dataHora'
 import PostSignUp from '../../services/postSignUp'
-        
+
 
 
 export default function Home() {
     const { admin, login, user, project, phase, process, image, ...state } = useSelector(state => state)
-
     const dispatch = useDispatch()
-    
-    function SignUp() {
-        PostSignUp(
-            'amaro silva',
-            'arcamos.j@gmail.com',
-            'amaro',
-            '1234',
-            'rua da portal',
-            '2000',
-            'casa',
-            '12397060',
-            'village',
-            'cacapava',
-            'SP',
-            '1'
-        )
-    } 
+    const Process = []
 
     function UserLogin() { Login('amaro', '1234', dispatch) }
     function ReadState() { console.log('state: ', state) }
+
     const phases = user.user.project.phase
+    console.log(`\n\n\n\--------------- ${Data('hours')} --------------`)
+    
 
-    function PhaseList() { phases.map(phase => <Text style={styles.text}>{phase.name}</Text>) }
+    const userHash = user.user.hash
+    const processHash = phases[0].process[1].hash 
+    const imageTitle = phases[0].process[1].images[1].name
+    //getImg(userHash, processHash, imageTitle)
+    
+    let link =  'https://img.ibxk.com.br/2019/07/26/26000559344397.jpg?w=1120&h=420&mode=crop&scale=both'
+    let link2 = 'http://localhost:9090/uploads/e966bb69-462d-0d6660cf/2887d7bc-2741-4e1bb8ab/pro-amaro-2.jpg'
+    
 
+    
+    function PhaseList() { phases.map(phase => { return console.log('phase: ', phase.name) }) }
+    
     function ProcessList() { phases.map(phase => {
-        const processes = phase.process
-        if (processes != null) { processes.map(p => { console.log(p.name) })}
+        if (phase.process != null) { phase.process.map(p => { 
+            console.log('    process: ', p.name) 
+            Process.push(p)
+            console.log('   array: ', Process) 
+
+        })}
     })}
 
     function ImageList() { 
@@ -52,28 +53,21 @@ export default function Home() {
             if (phase.process != null) {
                 phase.process.map(p => {
                     if (p.images != null) {
-                        p.images.map(image => { console.log(image.name) })
+                        p.images.map(image => { console.log('       image: ', image.name) })
                     }
                 })
             }
         })
     }
 
-    function teste() { 
-        return processes.map((p, id) =>
-            <TouchableOpacity id={id} style={styles.item} onPress={ReadState}>
-                <Image source={require(`../../../assets/${1}.jpg`)} style={styles.ImgItem} />
-                <View style={styles.DescriptionItem}>
-                    <Text style={styles.TextItem}>{p.description}</Text>
-                    <View style={styles.FooterItem}>
-                        <Text style={styles.TitleFooterItem}>{p.name}</Text>
-                        <Text style={styles.DataFooterItem}>{p.price}</Text>
-                    </View>
-                </View>
-            </TouchableOpacity>
-        )
+
+    function SelectionList() { 
+        console.log(this.hash) 
     }
-    
+
+    function seeDetails() {
+        console.log(this) 
+    }
 
     return (
         <Provider>
@@ -81,55 +75,38 @@ export default function Home() {
                 <View style={styles.container}>
                     <SafeAreaView style={styles.Header}>
                         <ScrollView style={styles.scrollView} horizontal={true}>
-                            <PhaseList /> 
+                        
+                            { phases.map(phase => { 
+                                return (
+                                    <TouchableOpacity hash={phase.hash} style={styles.item} onPress={SelectionList}>
+                                        <Text style={styles.text}>{phase.name}</Text>
+                                    </TouchableOpacity>
+                                )
+                            })}
+
                         </ScrollView>
                     </SafeAreaView>
                     <SafeAreaView style={styles.Content}>
                         <ScrollView style={styles.scrollView}>
-
-                            {/* <ProcessList />  */}
-
-                            {/* <TouchableOpacity style={styles.item} onPress={ReadState}>
-                                <Image source={require(`../../../assets/${1}.jpg`)} style={styles.ImgItem} />
-                                <View style={styles.DescriptionItem}>
-                                    <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
-                                    <View style={styles.FooterItem}>
-                                        <Text style={styles.TitleFooterItem}>Title</Text>
-                                        <Text style={styles.DataFooterItem}>{Data}</Text>
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.item} onPress={UserLogin}>
-                                <Image source={require(`../../../assets/${2}.jpg`)} style={styles.ImgItem} />
-                                <View style={styles.DescriptionItem}>
-                                    <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
-                                    <View style={styles.FooterItem}>
-                                        <Text style={styles.TitleFooterItem}>Title</Text>
-                                        <Text style={styles.DataFooterItem}>{Data}</Text>
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.item} onPress={SignUp}>
-                                <Image source={require(`../../../assets/${3}.jpg`)} style={styles.ImgItem} />
-                                <View style={styles.DescriptionItem}>
-                                    <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
-                                    <View style={styles.FooterItem}>
-                                        <Text style={styles.TitleFooterItem}>Title</Text>
-                                        <Text style={styles.DataFooterItem}>{Data}</Text>
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.item} onPress={PhaseList}>
-                                <Image source={require(`../../../assets/${4}.jpg`)} style={styles.ImgItem} />
-                                <View style={styles.DescriptionItem}>
-                                    <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
-                                    <View style={styles.FooterItem}>
-                                        <Text style={styles.TitleFooterItem}>Title</Text>
-                                        <Text style={styles.DataFooterItem}>{Data}</Text>
-                                    </View>
-                                </View>
-                            </TouchableOpacity> */}
                             
+                            { Process.map(p => { 
+                                return (
+                                    <TouchableOpacity hash={p.hash} style={styles.item} onPress={seeDetails}>
+                                        <Image source={require(`../../../assets/${1}.jpg`)} style={styles.ImgItem} />
+                                        <View style={styles.DescriptionItem}>
+                                            <Text style={styles.TextItem}>{p.description}</Text>
+                                            <View style={styles.FooterItem}>
+                                                <Text style={styles.TitleFooterItem}>{p.name}</Text>
+                                                <Text style={styles.DataFooterItem}>{p.price} - {p.price}</Text>
+                                            </View>
+                                        </View>
+                                    </TouchableOpacity>
+                                )
+                            })}
+
+                            <Image source={{uri: link}} style={styles.ImgItem} />
+                            <Image source={{uri: link2}} style={styles.ImgItem} />
+                        
                         </ScrollView>
                     </SafeAreaView>
                 </View>
