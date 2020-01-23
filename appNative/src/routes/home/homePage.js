@@ -38,30 +38,42 @@ export default function Home() {
 
     function UserLogin() { Login('amaro', '1234', dispatch) }
     function ReadState() { console.log('state: ', state) }
+    const phases = user.user.project.phase
 
-    function ItemList(data = false) { 
-        const phases = user.user.project.phase;
-        console.log('teste', phases)
-         
-        if (data) {
-            return phases.map((phase) =>
-                <Text style={styles.text}>{phase.name}</Text>
-            )
-        } else {
-            return phases.process.map((p) =>
-                <TouchableOpacity style={styles.item} onPress={ReadState}>
-                    <Image source={require(`../../../assets/${1}.jpg`)} style={styles.ImgItem} />
-                    <View style={styles.DescriptionItem}>
-                        <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
-                        <View style={styles.FooterItem}>
-                            <Text style={styles.TitleFooterItem}>Title</Text>
-                            <Text style={styles.DataFooterItem}>{Data}</Text>
-                        </View>
-                    </View>
-                </TouchableOpacity>
-            )
-        }
+    function PhaseList() { phases.map(phase => <Text style={styles.text}>{phase.name}</Text>) }
+
+    function ProcessList() { phases.map(phase => {
+        const processes = phase.process
+        if (processes != null) { processes.map(p => { console.log(p.name) })}
+    })}
+
+    function ImageList() { 
+        phases.map(phase => {
+            if (phase.process != null) {
+                phase.process.map(p => {
+                    if (p.images != null) {
+                        p.images.map(image => { console.log(image.name) })
+                    }
+                })
+            }
+        })
     }
+
+    function teste() { 
+        return processes.map((p, id) =>
+            <TouchableOpacity id={id} style={styles.item} onPress={ReadState}>
+                <Image source={require(`../../../assets/${1}.jpg`)} style={styles.ImgItem} />
+                <View style={styles.DescriptionItem}>
+                    <Text style={styles.TextItem}>{p.description}</Text>
+                    <View style={styles.FooterItem}>
+                        <Text style={styles.TitleFooterItem}>{p.name}</Text>
+                        <Text style={styles.DataFooterItem}>{p.price}</Text>
+                    </View>
+                </View>
+            </TouchableOpacity>
+        )
+    }
+    
 
     return (
         <Provider>
@@ -69,13 +81,13 @@ export default function Home() {
                 <View style={styles.container}>
                     <SafeAreaView style={styles.Header}>
                         <ScrollView style={styles.scrollView} horizontal={true}>
-                            <ItemList data={true}/> 
+                            <PhaseList /> 
                         </ScrollView>
                     </SafeAreaView>
                     <SafeAreaView style={styles.Content}>
                         <ScrollView style={styles.scrollView}>
 
-                            <ItemList data={false}/> 
+                            {/* <ProcessList />  */}
 
                             {/* <TouchableOpacity style={styles.item} onPress={ReadState}>
                                 <Image source={require(`../../../assets/${1}.jpg`)} style={styles.ImgItem} />
@@ -107,7 +119,7 @@ export default function Home() {
                                     </View>
                                 </View>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.item} onPress={ItemList}>
+                            <TouchableOpacity style={styles.item} onPress={PhaseList}>
                                 <Image source={require(`../../../assets/${4}.jpg`)} style={styles.ImgItem} />
                                 <View style={styles.DescriptionItem}>
                                     <Text style={styles.TextItem}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</Text>
