@@ -14,13 +14,14 @@ const INITIAL_STATE = {
   project: null,
   phase: null,
   process: null,
+  processes: [],
   image: null,
+  modal: false,
 };
 
 function list(state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'ADD_COURSE': return { ...state, data: [...state.data, action.title] };
-    case 'ADD_ITEM': return { ...state, process: [...state.process, action.title] };
     case 'CHANGE_AUTH': return { ...state, authenticated: action.bool };
     case 'CHANGE_LOGIN': return { ...state, login: action.obj };
     case 'CHANGE_USER': return { ...state, user: action.obj };
@@ -28,8 +29,10 @@ function list(state = INITIAL_STATE, action) {
     case 'CHANGE_ADMIN': return { ...state, admin: action.obj };
     case 'CHANGE_PROJECT': return { ...state, project: action.obj };
     case 'CHANGE_PHASE': return { ...state, phase: action.obj };
+    case 'CHANGE_PROCESSES': return { ...state, processes: action.obj };
     case 'CHANGE_PROCESS': return { ...state, process: action.obj };
     case 'CHANGE_IMAGE': return { ...state, image: action.obj };
+    case 'CHANGE_MODAL': return { ...state, modal: action.bool };
     default: return state;
   }
 } 

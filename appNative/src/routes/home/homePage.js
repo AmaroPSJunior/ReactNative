@@ -1,73 +1,55 @@
-import { TouchableOpacity, Text, View, Dimensions, StyleSheet, Image, ScrollView, SafeAreaView } from 'react-native'
+import { TouchableOpacity, Text, View, Dimensions, StyleSheet, Image, ScrollView, SafeAreaView, TouchableHighlight } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { Portal, Provider } from 'react-native-paper'
 import { COLOR } from 'react-native-material-ui'
 import Constants from 'expo-constants'
 import React from 'react'
 
-import getUser from '../../services/getUser'
-import getImg from '../../services/getImg'
-import getProjects from '../../services/getProject'
-import getPhase from '../../services/getPhase'
 import Login from '../../services/login'
 import Data from '../../components/dataHora'
-import PostSignUp from '../../services/postSignUp'
+import Modal from '../../components/modal2'
+import { compose } from 'redux'
 
 
 
 export default function Home() {
-    const { admin, login, user, project, phase, process, image, ...state } = useSelector(state => state)
+    const { admin, login, user, project, phase, processes, process, modal, image, ...state } = useSelector(state => state)
     const dispatch = useDispatch()
-    const Process = []
 
     function UserLogin() { Login('amaro', '1234', dispatch) }
     function ReadState() { console.log('state: ', state) }
 
     const phases = user.user.project.phase
     console.log(`\n\n\n\--------------- ${Data('hours')} --------------`)
-    
 
-    const userHash = user.user.hash
-    const processHash = phases[0].process[1].hash 
-    const imageTitle = phases[0].process[1].images[1].name
-    //getImg(userHash, processHash, imageTitle)
-    
+
     let link =  'https://img.ibxk.com.br/2019/07/26/26000559344397.jpg?w=1120&h=420&mode=crop&scale=both'
     let link2 = 'http://localhost:9090/uploads/e966bb69-462d-0d6660cf/2887d7bc-2741-4e1bb8ab/pro-amaro-2.jpg'
-    
 
-    
+
     function PhaseList() { phases.map(phase => { return console.log('phase: ', phase.name) }) }
-    
-    function ProcessList() { phases.map(phase => {
-        if (phase.process != null) { phase.process.map(p => { 
-            console.log('    process: ', p.name) 
-            Process.push(p)
-            console.log('   array: ', Process) 
+    function Process(obj) { return { type: 'CHANGE_PROCESSES', obj }}
+    function Modal(bool) { return { type: 'CHANGE_MODAL', bool }}
 
-        })}
-    })}
+    function ProcessList(itemPphase = phases[0]) {
 
-    function ImageList() { 
         phases.map(phase => {
-            if (phase.process != null) {
-                phase.process.map(p => {
-                    if (p.images != null) {
-                        p.images.map(image => { console.log('       image: ', image.name) })
-                    }
-                })
+            if (phase.hash === itemPphase.hash) {
+                if (phase.process != null) {
+                    dispatch(Process(phase.process))
+                } else {
+                    dispatch(Process([]))
+                }
             }
         })
     }
 
 
-    function SelectionList() { 
-        console.log(this.hash) 
-    }
+    function SelectionList() { ProcessList(this) }
+    
+    function seeDetails() { }
 
-    function seeDetails() {
-        console.log(this) 
-    }
+    function openModal() { dispatch(Modal(true)) }
 
     return (
         <Provider>
@@ -75,8 +57,8 @@ export default function Home() {
                 <View style={styles.container}>
                     <SafeAreaView style={styles.Header}>
                         <ScrollView style={styles.scrollView} horizontal={true}>
-                        
-                            { phases.map(phase => { 
+
+                            { phases.map(phase => {
                                 return (
                                     <TouchableOpacity hash={phase.hash} style={styles.item} onPress={SelectionList}>
                                         <Text style={styles.text}>{phase.name}</Text>
@@ -87,26 +69,38 @@ export default function Home() {
                         </ScrollView>
                     </SafeAreaView>
                     <SafeAreaView style={styles.Content}>
-                        <ScrollView style={styles.scrollView}>
-                            
-                            { Process.map(p => { 
-                                return (
-                                    <TouchableOpacity hash={p.hash} style={styles.item} onPress={seeDetails}>
-                                        <Image source={require(`../../../assets/${1}.jpg`)} style={styles.ImgItem} />
-                                        <View style={styles.DescriptionItem}>
-                                            <Text style={styles.TextItem}>{p.description}</Text>
-                                            <View style={styles.FooterItem}>
-                                                <Text style={styles.TitleFooterItem}>{p.name}</Text>
-                                                <Text style={styles.DataFooterItem}>{p.price} - {p.price}</Text>
-                                            </View>
-                                        </View>
-                                    </TouchableOpacity>
-                                )
-                            })}
 
+                        <Modal visible={modal}/>
+                        <TouchableOpacity onPress={() => { openModal }}>
+                            <Text>Abrir Modal</Text>
+                        </TouchableOpacity>
+
+                        <ScrollView style={styles.scrollView}>
+
+                            { 
+                                processes.map((p) => {
+                                    console.log(i)
+                                    i++
+                                    return (
+                                        <TouchableOpacity hash={p.hash} style={styles.item} onPress={seeDetails}>
+                                            <Image source={require(`../../../assets/${1}.jpg`)} style={styles.ImgItem} />
+                                            <View style={styles.DescriptionItem}>
+                                                <Text style={styles.TextItem}>{p.description}</Text>
+                                                <View style={styles.FooterItem}>
+                                                    <Text style={styles.TitleFooterItem}>{p.name}</Text>
+                                                    <Text style={styles.DataFooterItem}>{p.price} - {p.price}</Text>
+                                                </View>
+                                            </View>
+                                        </TouchableOpacity>
+                                    )
+                                })
+                            }
+
+                            {/*
                             <Image source={{uri: link}} style={styles.ImgItem} />
                             <Image source={{uri: link2}} style={styles.ImgItem} />
-                        
+                            */}
+
                         </ScrollView>
                     </SafeAreaView>
                 </View>
@@ -119,10 +113,10 @@ const ScreenHeight = Dimensions.get("window").height
 const ScreenWidth = Dimensions.get("window").width
 const styles = StyleSheet.create({
     Modal:{
-        height: 100, 
-        width: 100, 
+        height: 100,
+        width: 100,
         backgroundColor: 'red',
-        zIndex: 50, 
+        zIndex: 50,
         left: '50%',
         top: '50%',
 
@@ -140,13 +134,13 @@ const styles = StyleSheet.create({
     scrollView: {
     },
     text: {
-        backgroundColor: COLOR.blue700, 
+        backgroundColor: COLOR.blue700,
         color: '#fff',
         fontWeight: 'bold',
         fontSize: 20,
         borderWidth: 1,
         borderColor: '#fff',
-        borderRadius: 10, 
+        borderRadius: 10,
         padding: 15,
         margin: 10,
     },
@@ -162,13 +156,13 @@ const styles = StyleSheet.create({
         marginVertical: 10,
     },
     ImgItem:{
-        backgroundColor: COLOR.blue700, 
+        backgroundColor: COLOR.blue700,
         color: '#fff',
         fontWeight: 'bold',
         fontSize: 20,
         borderWidth: 1,
         borderColor: '#fff',
-        borderRadius: 10, 
+        borderRadius: 10,
         textAlign: "center",
         lineHeight: 100,
         margin: 0,

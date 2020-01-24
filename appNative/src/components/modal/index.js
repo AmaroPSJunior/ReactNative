@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
+import { TouchableOpacity, View, Dimensions, StyleSheet, Image, ScrollView, SafeAreaView } from 'react-native'
+
 
 export default class ModalCustom extends React.Component {
   state = {
@@ -15,12 +17,16 @@ export default class ModalCustom extends React.Component {
       <Provider>
          <Portal>
            <Modal visible={visible} onDismiss={this._hideModal}>
-             <Text>Example Modal</Text>
+              <View styles={styles.Content}>
+                <Text>Example Modal</Text>
+                <Text>Example Modal</Text>
+                <Text>Example Modal</Text>
+                <Text>Example Modal</Text>
+                <Text>Example Modal</Text>
+                <Text>Example Modal</Text>
+              </View>
            </Modal>
-           <Button
-             style={{ marginTop: 30 }}
-             onPress={this._showModal}
-           >
+           <Button onPress={this._showModal}>
              Show
            </Button>
          </Portal>
@@ -28,3 +34,12 @@ export default class ModalCustom extends React.Component {
     );
   }
 }
+
+
+const styles = StyleSheet.create({
+  Content:{
+    justifyContent: "center",
+    alignItems: "center",
+    color: '#fff',
+  },
+});
