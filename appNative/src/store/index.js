@@ -19,7 +19,7 @@ const INITIAL_STATE = {
   modal: false,
   modalVisible: false,
   page: 1,
-  totalPage: 5,
+  totalPage: 1,
 };
 
 function list(state = INITIAL_STATE, action) {
@@ -38,6 +38,7 @@ function list(state = INITIAL_STATE, action) {
     case 'CHANGE_MODAL': return { ...state, modal: action.bool };
     case 'CHANGE_MODALVISIBLE': return { ...state, modalVisible: action.bool };
     case 'CHANGE_PAGE': return { ...state, page: action.number };
+    case 'CHANGE_TOTALPAGE': return { ...state, totalPage: action.number };
     default: return state;
   }
 } 

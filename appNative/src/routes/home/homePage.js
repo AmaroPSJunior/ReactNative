@@ -12,8 +12,8 @@ import Modal from '../../components/modal'
 
 
 export default function Home() {
-    const { admin, login, user, project, phase, processes, process, modalVisible, images, ...state } = useSelector(state => state)
     const dispatch = useDispatch()
+    const { admin, login, user, project, phase, processes, process, modalVisible, images, ...state } = useSelector(state => state)
     const phases = user.user.project.phase
 
     console.log(`\n\n\n\--------------- ${Data('hours')} --------------`)
@@ -24,8 +24,10 @@ export default function Home() {
     function UserLogin() { Login('amaro', '1234', dispatch) }
     function ReadState() { console.log('state: ', state) }
 
-    function Process(obj) { return { type: 'CHANGE_PROCESSES', obj }}
     function Images(obj) { return { type: 'CHANGE_IMAGES', obj }}
+    function Process(obj) { return { type: 'CHANGE_PROCESSES', obj }}
+    function setPage(number) { return { type: 'CHANGE_PAGE', number }}
+    function setTotalPage(number) { return { type: 'CHANGE_TOTALPAGE', number }}
     function setModalVisible(bool) { return { type: 'CHANGE_MODALVISIBLE', bool }}
     function SelectionPhase() { ProcessList(this) }
     function SelectionProcess() { ImageList(this) }
@@ -45,10 +47,13 @@ export default function Home() {
     }
     
     function ImageList(itemProcess = processes[0]) {
-        processes.map(process => {
-            if (process.hash === itemProcess.hash) {
-                if (process.images != null) {
-                    dispatch(Images(process.images))
+        processes.map(pcess => {
+            if (pcess.hash === itemProcess.hash) {
+                if (pcess.images != null) {
+                    dispatch(Images(pcess.images))
+                    dispatch(setTotalPage(pcess.images.length))
+                    dispatch(setPage(1))
+                    console.log(pcess.images)
                 } else {
                     dispatch(Images([]))
                 }
