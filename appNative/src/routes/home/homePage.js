@@ -1,4 +1,4 @@
-import { TouchableOpacity, Text, View, Dimensions, StyleSheet, Image, ScrollView, SafeAreaView, TouchableHighlight } from 'react-native'
+import { TouchableOpacity, Text, View, Dimensions, StyleSheet, Image, ScrollView, SafeAreaView, TouchableHighlight, Button } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { Portal, Provider } from 'react-native-paper'
 import { COLOR } from 'react-native-material-ui'
@@ -7,32 +7,32 @@ import React from 'react'
 
 import Login from '../../services/login'
 import Data from '../../components/dataHora'
-import Modal from '../../components/modal2'
-import { compose } from 'redux'
+import Modal from '../../components/modal'
 
 
 
 export default function Home() {
-    const { admin, login, user, project, phase, processes, process, modal, image, ...state } = useSelector(state => state)
+    const { admin, login, user, project, phase, processes, process, modalVisible, images, ...state } = useSelector(state => state)
     const dispatch = useDispatch()
+    const phases = user.user.project.phase
 
+    console.log(`\n\n\n\--------------- ${Data('hours')} --------------`)
+    
+    let link =  'https://img.ibxk.com.br/2019/07/26/26000559344397.jpg?w=1120&h=420&mode=crop&scale=both'
+    let link2 = 'http://localhost:9090/uploads/e966bb69-462d-0d6660cf/2887d7bc-2741-4e1bb8ab/pro-amaro-2.jpg'
+   
     function UserLogin() { Login('amaro', '1234', dispatch) }
     function ReadState() { console.log('state: ', state) }
 
-    const phases = user.user.project.phase
-    console.log(`\n\n\n\--------------- ${Data('hours')} --------------`)
-
-
-    let link =  'https://img.ibxk.com.br/2019/07/26/26000559344397.jpg?w=1120&h=420&mode=crop&scale=both'
-    let link2 = 'http://localhost:9090/uploads/e966bb69-462d-0d6660cf/2887d7bc-2741-4e1bb8ab/pro-amaro-2.jpg'
-
-
-    function PhaseList() { phases.map(phase => { return console.log('phase: ', phase.name) }) }
     function Process(obj) { return { type: 'CHANGE_PROCESSES', obj }}
-    function Modal(bool) { return { type: 'CHANGE_MODAL', bool }}
-
+    function Images(obj) { return { type: 'CHANGE_IMAGES', obj }}
+    function setModalVisible(bool) { return { type: 'CHANGE_MODALVISIBLE', bool }}
+    function SelectionPhase() { ProcessList(this) }
+    function SelectionProcess() { ImageList(this) }
+    
+    function openModal() { dispatch(setModalVisible(true)) }
+    
     function ProcessList(itemPphase = phases[0]) {
-
         phases.map(phase => {
             if (phase.hash === itemPphase.hash) {
                 if (phase.process != null) {
@@ -43,13 +43,21 @@ export default function Home() {
             }
         })
     }
-
-
-    function SelectionList() { ProcessList(this) }
     
-    function seeDetails() { }
+    function ImageList(itemProcess = processes[0]) {
+        processes.map(process => {
+            if (process.hash === itemProcess.hash) {
+                if (process.images != null) {
+                    dispatch(Images(process.images))
+                } else {
+                    dispatch(Images([]))
+                }
+            }
+        })
 
-    function openModal() { dispatch(Modal(true)) }
+        dispatch(setModalVisible(true))
+        console.log()
+    }
 
     return (
         <Provider>
@@ -60,7 +68,7 @@ export default function Home() {
 
                             { phases.map(phase => {
                                 return (
-                                    <TouchableOpacity hash={phase.hash} style={styles.item} onPress={SelectionList}>
+                                    <TouchableOpacity hash={phase.hash} style={styles.item} onPress={SelectionPhase}>
                                         <Text style={styles.text}>{phase.name}</Text>
                                     </TouchableOpacity>
                                 )
@@ -68,21 +76,16 @@ export default function Home() {
 
                         </ScrollView>
                     </SafeAreaView>
+
+                    <Modal visible={modalVisible} />
+
                     <SafeAreaView style={styles.Content}>
-
-                        <Modal visible={modal}/>
-                        <TouchableOpacity onPress={() => { openModal }}>
-                            <Text>Abrir Modal</Text>
-                        </TouchableOpacity>
-
                         <ScrollView style={styles.scrollView}>
 
                             { 
                                 processes.map((p) => {
-                                    console.log(i)
-                                    i++
                                     return (
-                                        <TouchableOpacity hash={p.hash} style={styles.item} onPress={seeDetails}>
+                                        <TouchableOpacity hash={p.hash} style={styles.item} onPress={SelectionProcess}>
                                             <Image source={require(`../../../assets/${1}.jpg`)} style={styles.ImgItem} />
                                             <View style={styles.DescriptionItem}>
                                                 <Text style={styles.TextItem}>{p.description}</Text>

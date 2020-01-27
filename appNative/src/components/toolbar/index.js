@@ -8,10 +8,10 @@ import Logout from '../../services/Logout'
 
 export default function ToolbarCustom() {
     state = { ListItem: null, pesquisa: null }
-    const access_token = useSelector(state => state.user.access_token);
-    const dispatch = useDispatch();
+    const access_token = useSelector(state => state.user.access_token)
+    const dispatch = useDispatch()
     
-    function changeAuthAction (bool) { return { type: 'CHANGE_AUTH', bool }}
+    function changeAuthAction(bool) { return { type: 'CHANGE_AUTH', bool }}
 
     function goToIndex () {
         dispatch(changeAuthAction(false))

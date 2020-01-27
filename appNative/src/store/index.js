@@ -15,8 +15,11 @@ const INITIAL_STATE = {
   phase: null,
   process: null,
   processes: [],
-  image: null,
+  images: [],
   modal: false,
+  modalVisible: false,
+  page: 1,
+  totalPage: 5,
 };
 
 function list(state = INITIAL_STATE, action) {
@@ -31,8 +34,10 @@ function list(state = INITIAL_STATE, action) {
     case 'CHANGE_PHASE': return { ...state, phase: action.obj };
     case 'CHANGE_PROCESSES': return { ...state, processes: action.obj };
     case 'CHANGE_PROCESS': return { ...state, process: action.obj };
-    case 'CHANGE_IMAGE': return { ...state, image: action.obj };
+    case 'CHANGE_IMAGES': return { ...state, images: action.obj };
     case 'CHANGE_MODAL': return { ...state, modal: action.bool };
+    case 'CHANGE_MODALVISIBLE': return { ...state, modalVisible: action.bool };
+    case 'CHANGE_PAGE': return { ...state, page: action.number };
     default: return state;
   }
 } 

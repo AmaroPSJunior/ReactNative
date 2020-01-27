@@ -7,7 +7,7 @@ export default function logout (access_token){
   
 api.post(`logout/${access_token}`)
   .then((response) => {
-
+    console.log('logout: ' + JSON.stringify(response.data.message))
     return alert('logout: ' + JSON.stringify(response.data.message))
 
   })

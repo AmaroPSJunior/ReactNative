@@ -16,8 +16,6 @@ export default function login(user, password, dispatch) {
     dispatch(Login(response.data))
     getUser(response.data.access_token, dispatch, 'x') 
     
-    //dispatch(changeAuthAction(true))
-    
     console.log('login res: ' + JSON.stringify(response.data.access_token))
   })
   .catch(function (error) {
