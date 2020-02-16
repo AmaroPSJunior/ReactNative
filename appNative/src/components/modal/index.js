@@ -1,4 +1,4 @@
-import {Modal, Text, TouchableHighlight, View, Alert, StyleSheet, Button} from 'react-native';
+import {Modal, Text, TouchableHighlight, View, Alert, StyleSheet, Button, ScrollView} from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { COLOR } from 'react-native-material-ui'
 import React from 'react';
@@ -25,39 +25,42 @@ export default function ModalExample() {
 
           <View style={styles.Header}>
             <Text>Title modal!</Text>
+            <Text>{page}/{totalPage}</Text>
           </View>
 
           <View style={styles.Content}>
-            <Text>content modal!</Text>
-            <Text>{page}</Text>
-
-            { images.map(img => {
-              return(
-                <Text>{img.name}</Text>
-              )
-            })}
-
-
+            <ScrollView
+              horizontal
+              pagingEnabled
+              showsHorizontalScrollIndicator={false}
+              >
             
+              { images.map(img => {
+                return(
+                  <Text hash={img.hash} style={styles.Img}>{img.name}</Text>
+                )
+              })}
+        
+            </ScrollView>
           </View>
 
           <View style={styles.Footer}>
-            <Button 
-              title="  <<  " 
-              color={COLOR.blue700} 
-              onPress={() => { dispatch(setPage(page - 1)) }} 
-              disabled={ page <= 1 ? true : false } 
+            <Button
+              title="  <<  "
+              color={COLOR.blue700}
+              onPress={() => { dispatch(setPage(page - 1)) }}
+              disabled={page <= 1 ? true : false}
             />
-            <Button 
-              title="  Sair  " 
-              color={COLOR.blue700} 
-              onPress={() => { dispatch(setModalVisible(!modalVisible)) }} 
+            <Button
+              title="  Sair  "
+              color={COLOR.blue700}
+              onPress={() => { dispatch(setModalVisible(!modalVisible)) }}
             />
-            <Button 
-              title="  >>  " 
-              color={COLOR.blue700} 
+            <Button
+              title="  >>  "
+              color={COLOR.blue700}
               onPress={() => { dispatch(setPage(page + 1)) }}
-              disabled={ page >= 5 ? true : false } 
+              disabled={page >= totalPage ? true : false}
             />
           </View>
           
@@ -87,7 +90,8 @@ const styles = StyleSheet.create({
     height: '95%',
   },
   Header: {
-    justifyContent: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
     height: 50,
     //backgroundColor: 'green',
@@ -101,6 +105,27 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     flexGrow: 1,
 
+  },
+  Img: {
+    height: 200,
+    backgroundColor: COLOR.blue700,
+    paddingHorizontal: 100,
+    marginHorizontal: 10, 
+    lineHeight: 180,
+
+    borderWidth: 1,
+    borderRadius: 6,
+    borderColor: '#ddd',
+    borderBottomWidth: 0,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 6,
+    elevation: 5,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10,
+    padding: 10,
   },
   Footer: {
     flexDirection: "row",

@@ -1,4 +1,4 @@
-import api from '..';
+import api from '../';
 
 
 export default getUsers = (access_token, dispatch, id = null) => {
@@ -12,12 +12,7 @@ export default getUsers = (access_token, dispatch, id = null) => {
     function User(obj) { return { type: 'CHANGE_USER', obj }}
     dispatch(User(response.data))
     dispatch(changeAuthAction(true))
-    //alert('getUser: ' + JSON.stringify(response.data.user))
   })
-  // .then(() => {
-  //   function changeAuthAction(bool) { return { type: 'CHANGE_AUTH', bool }}
-  //   dispatch(changeAuthAction(true))
-  // })
   .catch(function (error) {
     alert('getUser: ' + error) 
     console.log(error)
