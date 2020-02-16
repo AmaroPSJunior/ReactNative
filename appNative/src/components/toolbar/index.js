@@ -1,9 +1,11 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import { Toolbar } from 'react-native-material-ui';
+import { Toolbar } from 'react-native-material-ui'
 import { Actions } from 'react-native-router-flux'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux'
 import Logout from '../../services/Logout'
+import { COLOR } from 'react-native-material-ui'
+import { View } from 'native-base'
 
 
 export default function ToolbarCustom() {
@@ -32,35 +34,39 @@ export default function ToolbarCustom() {
     }
 
     return(
-        <Toolbar
-            style={ styles.Toolbar }
-            leftElement="menu"
-            centerElement="Pesquisar"
-            searchable={{ 
-                autoFocus: true, 
-                placeholder: 'Digite...',  
-                    onLeftElementPress: () => { console.log('teste'); alert('chama menu') },
-                    onChangeText: () => { console.log('digitou') },
-                    onSearchClosed: () => { console.log('fechou') },
-                    onSearchCloseRequested: () => { console.log('clicou em fechar') },
-                    onSearchPressed: () => { console.log('clicou em pesquisar') },
-                    onSubmitEditing: (obj) => { 
-                        this.setState({ pesquisa: obj.nativeEvent.text })
-                        setTimeout(() => {
-                        console.log('Pesquisou:', this.state.pesquisa) 
-                        }, 300);
-                    },
+        <View style={styles.Toolbar}>
+            <Toolbar
+                style={{ container: { height: 50 }}}
+                leftElement="menu"
+                centerElement="Pesquisar"
+                searchable={{ 
+                    autoFocus: true, 
+                    placeholder: 'Digite...',  
+                        onLeftElementPress: () => { console.log('teste'); alert('chama menu') },
+                        onChangeText: () => { console.log('digitou') },
+                        onSearchClosed: () => { console.log('fechou') },
+                        onSearchCloseRequested: () => { console.log('clicou em fechar') },
+                        onSearchPressed: () => { console.log('clicou em pesquisar') },
+                        onSubmitEditing: (obj) => { 
+                            this.setState({ pesquisa: obj.nativeEvent.text })
+                            setTimeout(() => {
+                            console.log('Pesquisou:', this.state.pesquisa) 
+                            }, 300);
+                        },
+                    }}
+                    rightElement={{ menu: { icon: "more-vert", labels: ["item 1", "item 2", "Sair"] }}}
+                    onRightElementPress={ ( label ) => { 
+                    listFunction( label.index )  
                 }}
-                rightElement={{ menu: { icon: "more-vert", labels: ["item 1", "item 2", "Sair"] }}}
-                onRightElementPress={ ( label ) => { 
-                listFunction( label.index )  
-            }}
-        />
+            />
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     Toolbar: {
-
+        height: 74,
+        backgroundColor: COLOR.blue700,
+        justifyContent: "flex-end",
     }
 });

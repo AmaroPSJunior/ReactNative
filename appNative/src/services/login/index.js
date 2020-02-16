@@ -16,7 +16,8 @@ export default function login(user, password, dispatch) {
     dispatch(Login(response.data))
     getUser(response.data.access_token, dispatch, 'x') 
     
-    console.log('login res: ' + JSON.stringify(response.data.access_token))
+    //console.log('login res: ' + JSON.stringify(response.data.access_token))
+    console.log('login res: Login iniciado')
   })
   .catch(function (error) {
 

@@ -62,9 +62,9 @@ export default function Home() {
     return (
         <Provider>
             <Portal>
-                <View style={styles.container}>
+                <View style={styles.Container}>
                     <SafeAreaView style={styles.Header}>
-                        <ScrollView style={styles.scrollView} horizontal={true}>
+                        <ScrollView style={styles.scrollView} horizontal>
 
                             { phases.map(phase => {
                                 return (
@@ -81,20 +81,21 @@ export default function Home() {
 
                     <SafeAreaView style={styles.Content}>
                         <ScrollView style={styles.scrollView}>
-
                             { 
                                 processes.map((p) => {
                                     return (
-                                        <TouchableOpacity hash={p.hash} style={styles.item} onPress={SelectionProcess}>
-                                            <Image source={require(`../../../assets/${1}.jpg`)} style={styles.ImgItem} />
-                                            <View style={styles.DescriptionItem}>
-                                                <Text style={styles.TextItem}>{p.description}</Text>
-                                                <View style={styles.FooterItem}>
-                                                    <Text style={styles.TitleFooterItem}>{p.name}</Text>
-                                                    <Text style={styles.DataFooterItem}>{p.price} - {p.price}</Text>
+                                        <View style={styles.Process}>
+                                            <TouchableOpacity hash={p.hash} style={styles.item} onPress={SelectionProcess}>
+                                                <Image source={require(`../../../assets/${1}.jpg`)} style={styles.ImgItem} />
+                                                <View style={styles.DescriptionItem}>
+                                                    <Text style={styles.TextItem}>{p.description}</Text>
+                                                    <View style={styles.FooterItem}>
+                                                        <Text style={styles.TitleFooterItem}>{p.name}</Text>
+                                                        <Text style={styles.DataFooterItem}>{p.price} - {p.price}</Text>
+                                                    </View>
                                                 </View>
-                                            </View>
-                                        </TouchableOpacity>
+                                            </TouchableOpacity>
+                                        </View>
                                     )
                                 })
                             }
@@ -125,16 +126,37 @@ const styles = StyleSheet.create({
 
     },
     Container: {
-        backgroundColor: '#6e9cc1',
-        height: 100,
-        flex: 1,
-        marginTop: Constants.statusBarHeight,
+        //height: 'auto',
+        //marginTop: Constants.statusBarHeight,
+        //padding: 0,
     },
     Header: {
-        top: 24,
-        flexDirection: "row",
+        backgroundColor: '#fff',
+        paddingHorizontal: 10,
+        
+        borderColor: '#ddd',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.8,
+        elevation: 5,
     },
     scrollView: {
+    },
+    Process: {
+        backgroundColor: '#fff',
+        marginVertical: 5,
+        paddingHorizontal: 10,
+
+        borderWidth: 1,
+        borderRadius: 6,
+        borderColor: '#ddd',
+        borderBottomWidth: 0,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.8,
+        shadowRadius: 6,
+        elevation: 5,
+        marginHorizontal: 5,
     },
     text: {
         backgroundColor: COLOR.blue700,
@@ -148,9 +170,8 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     Content:{
-        padding: 10,
-        paddingTop: 30,
-        height: '85.3%',
+        padding: 5,
+        height: '80.3%',
     },
     item:{
         flexDirection: 'row',
@@ -164,7 +185,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 20,
         borderWidth: 1,
-        borderColor: '#fff',
+        borderColor: '#ccc',
         borderRadius: 10,
         textAlign: "center",
         lineHeight: 100,
@@ -174,6 +195,8 @@ const styles = StyleSheet.create({
     },
     DescriptionItem:{
         height: 100,
+        justifyContent: 'space-between',
+        alignItems: "flex-start",
     },
     TextItem:{
         fontSize: 15,
@@ -183,29 +206,21 @@ const styles = StyleSheet.create({
     },
     FooterItem:{
         flexDirection: "row",
+        justifyContent: 'space-between',
+        alignItems: "flex-end",
+        flexGrow: 1,
+        paddingHorizontal: 10,
+        width: '70%',
     },
     TitleFooterItem:{
         color: '#aaa',
         fontSize: 12,
-        margin: 0,
-        paddingLeft: 10,
-        width: 100,
         height: 'auto',
-        bottom: 0,
-        flex: 1,
-        lineHeight: 40,
     },
     DataFooterItem:{
         color: '#aaa',
         fontSize: 12,
-        margin: 0,
-        paddingRight: 10,
-        width: 100,
         height: 'auto',
-        bottom: 0,
-        textAlign: 'right',
-        flex: 1,
-        lineHeight: 40,
     },
 })
 
